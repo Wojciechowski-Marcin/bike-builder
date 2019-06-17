@@ -1,0 +1,35 @@
+stages:
+  - test
+
+image: node:alpine
+
+test_frontend:
+  cache:
+    paths:
+      - node_modules/
+  stage: test
+  before_script:
+    - cd frontend
+    - npm install
+  script:
+    - npm run build
+    - npm run test:ci
+    - rm -rf public
+    - mv build public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
+
+test_backend:
+  image: python:latest
+  stage: test
+  before_script:
+    - source <(sed 's/^/export /' env/backend.env)
+    - cd backend
+    - pip install -r requirements.txt
+  script:
+    - python manage.py test
+  only:
+    - master
