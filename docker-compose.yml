@@ -1,0 +1,26 @@
+version: "3.5"
+
+services:
+  frontend:
+    ports:
+      - 3000:3000
+    build:
+      context: frontend
+    volumes:
+      - ./frontend:/app
+
+  db:
+    image: postgres
+
+  backend:
+    ports:
+      - 8000:8000
+    command: python manage.py runserver 0.0.0.0:8000
+    build:
+      context: backend
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+    env_file:
+      - env/backend.env
