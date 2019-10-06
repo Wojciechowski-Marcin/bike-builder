@@ -9,14 +9,20 @@ DEBUG = True
 ALLOWED_HOSTS = os.environ['DJANGO_ALLOWED_HOSTS']
 
 INSTALLED_APPS = [
+    # DJANGO
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # APPS
     'api.apps.ApiConfig',
     'bikeparts.apps.BikepartsConfig',
+
+    #LIBS
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
