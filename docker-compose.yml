@@ -9,13 +9,10 @@ services:
     volumes:
       - ./frontend:/app
 
-  db:
-    image: postgres
-
   backend:
+    restart: always
     ports:
       - 8000:8000
-    command: python manage.py runserver 0.0.0.0:8000
     build:
       context: backend
     volumes:
@@ -24,3 +21,6 @@ services:
       - db
     env_file:
       - env/backend.env
+
+  db:
+    image: postgres
