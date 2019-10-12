@@ -1,0 +1,34 @@
+- model: bikeproperties.Application
+  pk: 1
+  fields:
+    name: City
+
+- model: bikeproperties.Application
+  pk: 2
+  fields:
+    name: Road
+
+- model: bikeproperties.Application
+  pk: 3
+  fields:
+    name: Trekking
+
+- model: bikeproperties.Application
+  pk: 4
+  fields:
+    name: All Mountain
+
+- model: bikeproperties.Application
+  pk: 5
+  fields:
+    name: Cross Country
+
+- model: bikeproperties.Application
+  pk: 6
+  fields:
+    name: Downhill
+
+- model: bikeproperties.Application
+  pk: 7
+  fields:
+    name: Enduro

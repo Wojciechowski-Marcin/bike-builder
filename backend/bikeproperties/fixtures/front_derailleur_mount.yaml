@@ -1,0 +1,9 @@
+- model: bikeproperties.FrontDerailleurMount
+  pk: 1
+  fields:
+    mount_type: Direct Mount
+
+- model: bikeproperties.FrontDerailleurMount
+  pk: 2
+  fields:
+    mount_type: Clamp

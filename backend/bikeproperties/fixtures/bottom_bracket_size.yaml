@@ -1,0 +1,9 @@
+- model: bikeproperties.BottomBracketSize
+  pk: 1
+  fields:
+    size: 68
+
+- model: bikeproperties.BottomBracketSize
+  pk: 2
+  fields:
+    size: 73

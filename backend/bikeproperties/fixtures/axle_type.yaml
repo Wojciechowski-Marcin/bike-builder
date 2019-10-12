@@ -1,0 +1,14 @@
+- model: bikeproperties.AxleType
+  pk: 1
+  fields:
+    a_type: 9x100
+
+- model: bikeproperties.AxleType
+  pk: 2
+  fields:
+    a_type: 15x100
+
+- model: bikeproperties.AxleType
+  pk: 3
+  fields:
+    a_type: 15x110

@@ -1,0 +1,69 @@
+- model: bikeproperties.Color
+  pk: 1
+  fields:
+    name: Black
+
+- model: bikeproperties.Color
+  pk: 2
+  fields:
+    name: Red
+
+- model: bikeproperties.Color
+  pk: 3
+  fields:
+    name: Green
+
+- model: bikeproperties.Color
+  pk: 4
+  fields:
+    name: Blue
+
+- model: bikeproperties.Color
+  pk: 5
+  fields:
+    name: Yellow
+
+- model: bikeproperties.Color
+  pk: 6
+  fields:
+    name: Orange
+
+- model: bikeproperties.Color
+  pk: 7
+  fields:
+    name: Silver
+
+- model: bikeproperties.Color
+  pk: 8
+  fields:
+    name: White
+
+- model: bikeproperties.Color
+  pk: 9
+  fields:
+    name: Turquoise
+
+- model: bikeproperties.Color
+  pk: 10
+  fields:
+    name: Purple
+
+- model: bikeproperties.Color
+  pk: 11
+  fields:
+    name: Desert
+
+- model: bikeproperties.Color
+  pk: 12
+  fields:
+    name: Brown
+
+- model: bikeproperties.Color
+  pk: 13
+  fields:
+    name: Grey
+
+- model: bikeproperties.Color
+  pk: 14
+  fields:
+    name: Pearl

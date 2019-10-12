@@ -1,0 +1,19 @@
+- model: bikeproperties.BrakeRotorSize
+  pk: 1
+  fields:
+    size: 140
+
+- model: bikeproperties.BrakeRotorSize
+  pk: 2
+  fields:
+    size: 160
+
+- model: bikeproperties.BrakeRotorSize
+  pk: 3
+  fields:
+    size: 180
+
+- model: bikeproperties.BrakeRotorSize
+  pk: 4
+  fields:
+    size: 200

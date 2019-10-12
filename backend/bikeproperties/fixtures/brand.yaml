@@ -1,0 +1,4 @@
+- model: bikeproperties.Brand
+  pk: 1
+  fields:
+    name: RockShox

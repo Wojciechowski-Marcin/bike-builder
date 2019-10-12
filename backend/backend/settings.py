@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     # APPS
     'api.apps.ApiConfig',
     'bikeparts.apps.BikepartsConfig',
+    'bikeproperties.apps.BikepropertiesConfig',
 
     #LIBS
     'django_extensions'
@@ -91,3 +92,5 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+
+FIXTURE_DIRS = 'fixtures'

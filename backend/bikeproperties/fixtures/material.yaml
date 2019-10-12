@@ -1,0 +1,9 @@
+- model: bikeproperties.Material
+  pk: 1
+  fields:
+    name: Aluminium
+
+- model: bikeproperties.Material
+  pk: 2
+  fields:
+    name: Carbon

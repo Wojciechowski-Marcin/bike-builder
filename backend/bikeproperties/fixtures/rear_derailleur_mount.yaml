@@ -1,0 +1,9 @@
+- model: bikeproperties.RearDerailleurMount
+  pk: 1
+  fields:
+    mount_type: Hanger
+
+- model: bikeproperties.RearDerailleurMount
+  pk: 2
+  fields:
+    mount_type: Bolt-on
