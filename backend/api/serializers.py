@@ -50,7 +50,7 @@ class HeadtubeTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = bikeproperties.models.HeadtubeType
-        fields = ('id', 'h_type', 'size',)
+        fields = ('id', 'headtube_type', 'size',)
 
 
 class SeatclampTypeSerializer(serializers.ModelSerializer):
@@ -64,7 +64,7 @@ class BrakeTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = bikeproperties.models.BrakeType
-        fields = ('id', 'b_type', 'mount_type',)
+        fields = ('id', 'brake_type', 'mount_type',)
 
 
 class BottomBracketTypeSerializer(serializers.ModelSerializer):
@@ -99,7 +99,7 @@ class AxleTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = bikeproperties.models.AxleType
-        fields = ('id', 'a_type',)
+        fields = ('id', 'axle_type',)
 
 
 class SpeedCompatibilitySerializer(serializers.ModelSerializer):
@@ -113,7 +113,7 @@ class HandlebarTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = bikeproperties.models.HandlebarType
-        fields = ('id', 'a_type',)
+        fields = ('id', 'size',)
 
 
 class BikePartSerializer(serializers.ModelSerializer):

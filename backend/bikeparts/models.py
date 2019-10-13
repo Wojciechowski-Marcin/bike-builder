@@ -61,9 +61,9 @@ class BikePart(models.Model):
         return self.__class__.__name__
 
     def __str__(self):
-        name = f'<{self.class_name}> {self.brand} '
+        name = f'<{self.class_name}> {self.brand.name} '
         if self.group:
-            name += f'{self.group} '
+            name += f'{self.group.name} '
         name += f'{self.model}'
         return name
 

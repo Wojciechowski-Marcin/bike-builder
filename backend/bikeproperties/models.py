@@ -93,7 +93,7 @@ class HeadtubeType(models.Model):
         return self.__class__.__name__
 
     def __str__(self):
-        return f'<{self.class_name}> {self.size} {self.h_type}'
+        return f'<{self.class_name}> {self.size} {self.headtube_type}'
 
 
 class SeatclampType(models.Model):
@@ -123,7 +123,7 @@ class BrakeType(models.Model):
         return self.__class__.__name__
 
     def __str__(self):
-        return f'<{self.class_name}> {self.b_type} {self.mount_type}'
+        return f'<{self.class_name}> {self.brake_type} {self.mount_type}'
 
 
 class BottomBracketType(models.Model):
@@ -190,7 +190,7 @@ class AxleType(models.Model):
         return self.__class__.__name__
 
     def __str__(self):
-        return f'<{self.class_name}> {self.a_type}'
+        return f'<{self.class_name}> {self.axle_type}'
 
 
 class SpeedCompatibility(models.Model):

@@ -2,16 +2,16 @@
   pk: 1
   fields:
     mount_type: IS
-    b_type: Disc
+    brake_type: Disc
 
 - model: bikeproperties.BrakeType
   pk: 2
   fields:
     mount_type: PM
-    b_type: Disc
+    brake_type: Disc
 
 - model: bikeproperties.BrakeType
   pk: 3
   fields:
     mount_type: Pivot
-    b_type: Rim
+    brake_type: Rim
