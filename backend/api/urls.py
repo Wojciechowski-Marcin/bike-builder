@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.urls import path
 
-from .views import test
+from api import views
+
 
 urlpatterns = [
-    path('test/', test, name='test'),
+    path('frames/', views.frame_view),
 ]

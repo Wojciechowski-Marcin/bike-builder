@@ -2064,11 +2064,11 @@ digraph model_graph {
     </TABLE>
     >]
 
-  bikeproperties_models_WheelSize [label=<
+  bikeproperties_models_WheelType [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    WheelSize
+    WheelType
     </B></FONT></TD></TR>
   
   
@@ -2090,11 +2090,11 @@ digraph model_graph {
     </TABLE>
     >]
 
-  bikeproperties_models_Headtube [label=<
+  bikeproperties_models_HeadtubeType [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    Headtube
+    HeadtubeType
     </B></FONT></TD></TR>
   
   
@@ -2124,11 +2124,11 @@ digraph model_graph {
     </TABLE>
     >]
 
-  bikeproperties_models_SeatclampSize [label=<
+  bikeproperties_models_SeatclampType [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    SeatclampSize
+    SeatclampType
     </B></FONT></TD></TR>
   
   
@@ -2184,11 +2184,11 @@ digraph model_graph {
     </TABLE>
     >]
 
-  bikeproperties_models_BottomBracketSize [label=<
+  bikeproperties_models_BottomBracketType [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    BottomBracketSize
+    BottomBracketType
     </B></FONT></TD></TR>
   
   
@@ -2210,11 +2210,11 @@ digraph model_graph {
     </TABLE>
     >]
 
-  bikeproperties_models_FrontDerailleurMount [label=<
+  bikeproperties_models_FrontDerailleurType [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    FrontDerailleurMount
+    FrontDerailleurType
     </B></FONT></TD></TR>
   
   
@@ -2236,11 +2236,11 @@ digraph model_graph {
     </TABLE>
     >]
 
-  bikeproperties_models_RearDerailleurMount [label=<
+  bikeproperties_models_RearDerailleurType [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    RearDerailleurMount
+    RearDerailleurType
     </B></FONT></TD></TR>
   
   
@@ -2262,11 +2262,11 @@ digraph model_graph {
     </TABLE>
     >]
 
-  bikeproperties_models_BrakeRotorSize [label=<
+  bikeproperties_models_BrakeRotorType [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    BrakeRotorSize
+    BrakeRotorType
     </B></FONT></TD></TR>
   
   
@@ -2340,11 +2340,11 @@ digraph model_graph {
     </TABLE>
     >]
 
-  bikeproperties_models_HandlebarSize [label=<
+  bikeproperties_models_HandlebarType [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    HandlebarSize
+    HandlebarType
     </B></FONT></TD></TR>
   
   
@@ -2429,37 +2429,37 @@ digraph model_graph {
   bikeparts_models_BikePart -> bikeproperties_models_Color
   [label=" color (%(class)ss)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  bikeparts_models_Frame -> bikeproperties_models_Headtube
+  bikeparts_models_Frame -> bikeproperties_models_HeadtubeType
   [label=" headtube (frames)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  bikeparts_models_Frame -> bikeproperties_models_SeatclampSize
+  bikeparts_models_Frame -> bikeproperties_models_SeatclampType
   [label=" seatclamp_size (frames)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  bikeparts_models_Frame -> bikeproperties_models_BottomBracketSize
+  bikeparts_models_Frame -> bikeproperties_models_BottomBracketType
   [label=" bottom_bracket_size (frames)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  bikeparts_models_Frame -> bikeproperties_models_BrakeRotorSize
+  bikeparts_models_Frame -> bikeproperties_models_BrakeRotorType
   [label=" max_brake_rotor_size (frames)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Frame -> bikeproperties_models_Application
   [label=" applications (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
 
-  bikeparts_models_Frame -> bikeproperties_models_WheelSize
+  bikeparts_models_Frame -> bikeproperties_models_WheelType
   [label=" wheel_sizes (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Frame -> bikeproperties_models_BrakeType
   [label=" brake_type (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
 
-  bikeparts_models_Frame -> bikeproperties_models_RearDerailleurMount
+  bikeparts_models_Frame -> bikeproperties_models_RearDerailleurType
   [label=" rear_derailleur_mount_type (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
 
-  bikeparts_models_Frame -> bikeproperties_models_FrontDerailleurMount
+  bikeparts_models_Frame -> bikeproperties_models_FrontDerailleurType
   [label=" front_derailleur_mount_type (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Frame -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
-  bikeparts_models_Fork -> bikeproperties_models_Headtube
+  bikeparts_models_Fork -> bikeproperties_models_HeadtubeType
   [label=" headtube (forks)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Fork -> bikeproperties_models_AxleType
@@ -2468,7 +2468,7 @@ digraph model_graph {
   bikeparts_models_Fork -> bikeproperties_models_Application
   [label=" applications (forks)"] [arrowhead=dot arrowtail=dot, dir=both];
 
-  bikeparts_models_Fork -> bikeproperties_models_WheelSize
+  bikeparts_models_Fork -> bikeproperties_models_WheelType
   [label=" wheel_sizes (forks)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Fork -> bikeproperties_models_BrakeType
@@ -2477,7 +2477,7 @@ digraph model_graph {
   bikeparts_models_Fork -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
-  bikeparts_models_Crankset -> bikeproperties_models_BottomBracketSize
+  bikeparts_models_Crankset -> bikeproperties_models_BottomBracketType
   [label=" bottom_bracket_size (cranksets)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Crankset -> bikeproperties_models_Application
@@ -2498,7 +2498,7 @@ digraph model_graph {
   bikeparts_models_Cassette -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
-  bikeparts_models_FrontDerailleur -> bikeproperties_models_FrontDerailleurMount
+  bikeparts_models_FrontDerailleur -> bikeproperties_models_FrontDerailleurType
   [label=" mount_type (front_derailleurs)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_FrontDerailleur -> bikeproperties_models_Application
@@ -2510,7 +2510,7 @@ digraph model_graph {
   bikeparts_models_FrontDerailleur -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
-  bikeparts_models_RearDerailleur -> bikeproperties_models_RearDerailleurMount
+  bikeparts_models_RearDerailleur -> bikeproperties_models_RearDerailleurType
   [label=" mount_type (rear_derailleurs)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_RearDerailleur -> bikeproperties_models_Application
@@ -2549,7 +2549,7 @@ digraph model_graph {
   bikeparts_models_DerailleurLever -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
-  bikeparts_models_Rotor -> bikeproperties_models_BrakeRotorSize
+  bikeparts_models_Rotor -> bikeproperties_models_BrakeRotorType
   [label=" size (rotors)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Rotor -> bikeproperties_models_Application
@@ -2558,7 +2558,7 @@ digraph model_graph {
   bikeparts_models_Rotor -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
-  bikeparts_models_Handlebar -> bikeproperties_models_HandlebarSize
+  bikeparts_models_Handlebar -> bikeproperties_models_HandlebarType
   [label=" size (handlebars)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Handlebar -> bikeproperties_models_Application
@@ -2567,10 +2567,10 @@ digraph model_graph {
   bikeparts_models_Handlebar -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
-  bikeparts_models_Stem -> bikeproperties_models_Headtube
+  bikeparts_models_Stem -> bikeproperties_models_HeadtubeType
   [label=" headtube (stems)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  bikeparts_models_Stem -> bikeproperties_models_HandlebarSize
+  bikeparts_models_Stem -> bikeproperties_models_HandlebarType
   [label=" handlebar_size (stems)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Stem -> bikeproperties_models_Application
@@ -2585,7 +2585,7 @@ digraph model_graph {
   bikeparts_models_Saddle -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
-  bikeparts_models_Seatpost -> bikeproperties_models_SeatclampSize
+  bikeparts_models_Seatpost -> bikeproperties_models_SeatclampType
   [label=" size (seatposts)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Seatpost -> bikeproperties_models_Application
@@ -2594,7 +2594,7 @@ digraph model_graph {
   bikeparts_models_Seatpost -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
-  bikeparts_models_Wheels -> bikeproperties_models_WheelSize
+  bikeparts_models_Wheels -> bikeproperties_models_WheelType
   [label=" size (wheels)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Wheels -> bikeproperties_models_BrakeType

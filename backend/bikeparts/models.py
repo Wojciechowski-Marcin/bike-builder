@@ -45,7 +45,7 @@ class BikePart(models.Model):
         'bikeproperties.Color',
         on_delete=models.PROTECT,
         related_name='%(class)ss',
-        null=True, 
+        null=True,
         blank=True)
 
     price = models.DecimalField(
@@ -74,42 +74,42 @@ class BikePart(models.Model):
 class Frame(BikePart):
 
     size = models.DecimalField(
-        max_digits=2, 
+        max_digits=3, 
         decimal_places=1)
 
-    wheel_sizes = models.ManyToManyField(
-        bikeproperties.models.WheelSize,
+    wheel_types = models.ManyToManyField(
+        bikeproperties.models.WheelType,
         related_name='frames')
 
-    headtube = models.ForeignKey(
-        'bikeproperties.Headtube',
+    headtube_type = models.ForeignKey(
+        'bikeproperties.HeadtubeType',
         on_delete=models.PROTECT,
         related_name='frames')
         
-    seatclamp_size = models.ForeignKey(
-        'bikeproperties.SeatclampSize',
+    seatclamp_type = models.ForeignKey(
+        'bikeproperties.SeatclampType',
         on_delete=models.PROTECT,
         related_name='frames')
 
-    bottom_bracket_size = models.ForeignKey(
-        'bikeproperties.BottomBracketSize',
+    bottom_bracket_type = models.ForeignKey(
+        'bikeproperties.BottomBracketType',
         on_delete=models.PROTECT,
         related_name='frames')
 
-    brake_type = models.ManyToManyField(
+    brake_types = models.ManyToManyField(
         bikeproperties.models.BrakeType,
         related_name='frames')
 
-    rear_derailleur_mount_type = models.ManyToManyField(
-        bikeproperties.models.RearDerailleurMount,
+    rear_derailleur_types = models.ManyToManyField(
+        bikeproperties.models.RearDerailleurType,
         related_name='frames')
 
-    front_derailleur_mount_type = models.ManyToManyField(
-        bikeproperties.models.FrontDerailleurMount,
+    front_derailleur_types = models.ManyToManyField(
+        bikeproperties.models.FrontDerailleurType,
         related_name='frames')
 
-    max_brake_rotor_size = models.ForeignKey(
-        'bikeproperties.BrakeRotorSize',
+    brake_rotor_type = models.ForeignKey(
+        'bikeproperties.BrakeRotorType',
         on_delete=models.PROTECT,
         related_name='frames',
         null=True,
@@ -122,8 +122,7 @@ class Frame(BikePart):
         blank=True)
 
     # shock_size = models.CharField(
-    #     null=True)
-    
+    #     null=True)  
 
 
 class Fork(BikePart):
@@ -133,8 +132,8 @@ class Fork(BikePart):
         ('Air', 'Air')
     ]
 
-    wheel_sizes = models.ManyToManyField(
-        bikeproperties.models.WheelSize,
+    wheel_types = models.ManyToManyField(
+        bikeproperties.models.WheelType,
         related_name='forks')
 
     suspension_type = models.CharField(
@@ -145,8 +144,8 @@ class Fork(BikePart):
         max_digits=3, 
         decimal_places=0)
 
-    headtube = models.ForeignKey(
-        'bikeproperties.Headtube',
+    headtube_type = models.ForeignKey(
+        'bikeproperties.HeadtubeType',
         on_delete=models.PROTECT,
         related_name='forks')
 
@@ -155,7 +154,7 @@ class Fork(BikePart):
         on_delete=models.PROTECT,
         related_name='forks')
 
-    brake_type = models.ManyToManyField(
+    brake_types = models.ManyToManyField(
         bikeproperties.models.BrakeType,
         related_name='forks')
 
@@ -176,12 +175,12 @@ class Crankset(BikePart):
     gradiation = models.CharField(
         max_length=8)
 
-    speed_compatibility = models.ManyToManyField(
+    speed_compatibilities = models.ManyToManyField(
         bikeproperties.models.SpeedCompatibility,
         related_name='cranksets')
 
-    bottom_bracket_size = models.ForeignKey(
-        'bikeproperties.BottomBracketSize',
+    bottom_bracket_type = models.ForeignKey(
+        'bikeproperties.BottomBracketType',
         on_delete=models.PROTECT,
         related_name='cranksets')
 
@@ -195,32 +194,31 @@ class Cassette(BikePart):
     gradiation = models.CharField(
         max_length=35)
 
-    speed_compatibility = models.ManyToManyField(
+    speed_compatibilities = models.ManyToManyField(
         bikeproperties.models.SpeedCompatibility,
         related_name='cassettes')
 
 
-
 class FrontDerailleur(BikePart):
-    
-    speed_compatibility = models.ManyToManyField(
+
+    speed_compatibilities = models.ManyToManyField(
         bikeproperties.models.SpeedCompatibility,
         related_name='front_derailleurs')
 
-    mount_type = models.ForeignKey(
-        'bikeproperties.FrontDerailleurMount',
+    front_derailleur_type = models.ForeignKey(
+        'bikeproperties.FrontDerailleurType',
         on_delete=models.PROTECT,
         related_name='front_derailleurs')
 
 
 class RearDerailleur(BikePart):
-    
-    speed_compatibility = models.ManyToManyField(
+
+    speed_compatibilities = models.ManyToManyField(
         bikeproperties.models.SpeedCompatibility,
         related_name='rear_derailleurs')
 
-    mount_type = models.ForeignKey(
-        'bikeproperties.RearDerailleurMount',
+    rear_derailleur_type = models.ForeignKey(
+        'bikeproperties.RearDerailleurType',
         on_delete=models.PROTECT,
         related_name='rear_derailleurs')
 
@@ -242,16 +240,16 @@ class BrakeLever(BikePart):
 
 
 class DerailleurLever(BikePart):
-    
-    speed_compatibility = models.ManyToManyField(
+
+    speed_compatibilities = models.ManyToManyField(
         bikeproperties.models.SpeedCompatibility,
         related_name='derailleur_levers')
 
 
 class Rotor(BikePart):
 
-    size = models.ForeignKey(
-        'bikeproperties.BrakeRotorSize',
+    brake_rotor_type = models.ForeignKey(
+        'bikeproperties.BrakeRotorType',
         on_delete=models.PROTECT,
         related_name='rotors')
 
@@ -261,9 +259,9 @@ class Handlebar(BikePart):
     width = models.DecimalField(
         max_digits=3, 
         decimal_places=0)
-        
-    size = models.ForeignKey(
-        'bikeproperties.HandlebarSize',
+
+    handlebar_type = models.ForeignKey(
+        'bikeproperties.HandlebarType',
         on_delete=models.PROTECT,
         related_name='handlebars')
 
@@ -278,13 +276,13 @@ class Stem(BikePart):
         max_digits=3, 
         decimal_places=0)
 
-    headtube = models.ForeignKey(
-        'bikeproperties.Headtube',
+    headtube_type = models.ForeignKey(
+        'bikeproperties.HeadtubeType',
         on_delete=models.PROTECT,
         related_name='stems')
 
-    handlebar_size = models.ForeignKey(
-        'bikeproperties.HandlebarSize',
+    handlebar_type = models.ForeignKey(
+        'bikeproperties.HandlebarType',
         on_delete=models.PROTECT,
         related_name='stems')
 
@@ -306,8 +304,8 @@ class Seatpost(BikePart):
         max_digits=3, 
         decimal_places=0)
         
-    size = models.ForeignKey(
-        'bikeproperties.SeatclampSize',
+    seatclamp_type = models.ForeignKey(
+        'bikeproperties.SeatclampType',
         on_delete=models.PROTECT,
         related_name='seatposts')
 
@@ -320,8 +318,8 @@ class Seatpost(BikePart):
 
 class Wheels(BikePart):
         
-    size = models.ForeignKey(
-        'bikeproperties.WheelSize',
+    wheel_type = models.ForeignKey(
+        'bikeproperties.WheelType',
         on_delete=models.PROTECT,
         related_name='wheels')
 

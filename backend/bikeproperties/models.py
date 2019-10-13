@@ -66,7 +66,7 @@ class Application(models.Model):
         return f'<{self.class_name}> {self.name}'
 
 
-class WheelSize(models.Model):
+class WheelType(models.Model):
 
     size = models.DecimalField(
         max_digits=3, 
@@ -80,9 +80,9 @@ class WheelSize(models.Model):
         return f'<{self.class_name}> {self.size}\"'
 
 
-class Headtube(models.Model):
+class HeadtubeType(models.Model):
 
-    h_type = models.CharField(
+    headtube_type = models.CharField(
         max_length=16)
 
     size = models.CharField(
@@ -96,7 +96,7 @@ class Headtube(models.Model):
         return f'<{self.class_name}> {self.size} {self.h_type}'
 
 
-class SeatclampSize(models.Model):
+class SeatclampType(models.Model):
 
     size = models.DecimalField(
         max_digits=3,
@@ -115,7 +115,7 @@ class BrakeType(models.Model):
     mount_type = models.CharField(
         max_length=16)
 
-    b_type = models.CharField(
+    brake_type = models.CharField(
         max_length=16)
 
     @property
@@ -126,7 +126,7 @@ class BrakeType(models.Model):
         return f'<{self.class_name}> {self.b_type} {self.mount_type}'
 
 
-class BottomBracketSize(models.Model):
+class BottomBracketType(models.Model):
 
     size = models.DecimalField(
         max_digits=2,
@@ -140,7 +140,7 @@ class BottomBracketSize(models.Model):
         return f'<{self.class_name}> {self.size}mm'
 
 
-class FrontDerailleurMount(models.Model):
+class FrontDerailleurType(models.Model):
 
     mount_type = models.CharField(
         max_length=16)
@@ -153,7 +153,7 @@ class FrontDerailleurMount(models.Model):
         return f'<{self.class_name}> {self.mount_type}'
 
 
-class RearDerailleurMount(models.Model):
+class RearDerailleurType(models.Model):
 
     mount_type = models.CharField(
         max_length=16)
@@ -166,7 +166,7 @@ class RearDerailleurMount(models.Model):
         return f'<{self.class_name}> {self.mount_type}'
 
 
-class BrakeRotorSize(models.Model):
+class BrakeRotorType(models.Model):
 
     size = models.DecimalField(
         max_digits=3, 
@@ -182,7 +182,7 @@ class BrakeRotorSize(models.Model):
 
 class AxleType(models.Model):
 
-    a_type = models.CharField(
+    axle_type = models.CharField(
         max_length=16)
 
     @property
@@ -209,7 +209,7 @@ class SpeedCompatibility(models.Model):
         verbose_name_plural = 'Speed Compatibilities'
 
 
-class HandlebarSize(models.Model):
+class HandlebarType(models.Model):
 
     size = models.DecimalField(
         max_digits=3,

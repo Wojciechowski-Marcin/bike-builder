@@ -1,9 +1,9 @@
-- model: bikeproperties.HandlebarSize
+- model: bikeproperties.HandlebarType
   pk: 1
   fields:
     size: 25.4
 
-- model: bikeproperties.HandlebarSize
+- model: bikeproperties.HandlebarType
   pk: 2
   fields:
     size: 31.8

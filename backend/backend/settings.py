@@ -23,7 +23,8 @@ INSTALLED_APPS = [
     'bikeproperties.apps.BikepropertiesConfig',
 
     #LIBS
-    'django_extensions'
+    'django_extensions',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
