@@ -1,11 +1,11 @@
 import {
   fetchProductsPending,
   fetchProductsSuccess,
-  fetchProductsError,
+  fetchProductsError
 } from "../actions";
 
 function fetchProducts() {
-  return dispatch => {
+  return (dispatch: any) => {
     dispatch(fetchProductsPending());
     fetch("api/frames/")
       .then(res => res.json())

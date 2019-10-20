@@ -4,11 +4,17 @@ import { bindActionCreators } from "redux";
 
 import fetchProductsAction from "../data/fetchProducts";
 import { getProductsError, getProducts, getProductsPending } from "../reducers";
+import { IFrame } from "../data_types/IFrame";
 
-// import ProductList from "./ProductList";
+interface IProps {
+  products: IFrame[];
+  error: any;
+  pending: boolean;
+  fetchProducts: any;
+}
 
-class ProductView_ extends Component {
-  constructor(props) {
+class ProductView_ extends Component<IProps> {
+  constructor(props: IProps) {
     super(props);
     this.shouldComponentRender = this.shouldComponentRender.bind(this);
   }
@@ -36,28 +42,28 @@ class ProductView_ extends Component {
       <div className="product-list-wrapper">
         {error && <span className="product-list-error">{error}</span>}
         {products.map(product => {
-          return <p key={product.id}>{product.id}</p>;
+          return <p key={product.id}>{JSON.stringify(product)}</p>;
         })}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   error: getProductsError(state),
   products: getProducts(state),
-  pending: getProductsPending(state),
+  pending: getProductsPending(state)
 });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch: any) =>
   bindActionCreators(
     {
-      fetchProducts: fetchProductsAction,
+      fetchProducts: fetchProductsAction
     },
-    dispatch,
+    dispatch
   );
 
 export const ProductView = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ProductView_);
