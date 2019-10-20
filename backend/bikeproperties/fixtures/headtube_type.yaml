@@ -1,0 +1,11 @@
+
+- model: bikeproperties.headtubetype
+  pk: 1
+  fields:
+    headtube_type: Tapered
+    size: 1 1/8" - 1 1/4"
+- model: bikeproperties.headtubetype
+  pk: 2
+  fields:
+    headtube_type: Tapered
+    size: 1 1/8" - 1 1/2"

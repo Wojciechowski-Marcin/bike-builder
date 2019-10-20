@@ -7,7 +7,8 @@ python manage.py migrate
 # python manage.py collectstatic
 
 echo "Loading fixtures"
-python manage.py loaddata bikeproperties/fixtures/*.yaml
+python manage.py loaddata bikeproperties/fixtures/*.yaml -i
+python manage.py loaddata bikeparts/fixtures/*.yaml -i
 
 echo "Creating dev admin"
 echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@myproject.com', 'pass')" | python manage.py shell

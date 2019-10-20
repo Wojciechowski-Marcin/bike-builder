@@ -1,17 +1,21 @@
-- model: bikeproperties.BrakeType
+
+- model: bikeproperties.braketype
   pk: 1
   fields:
     mount_type: IS
     brake_type: Disc
-
-- model: bikeproperties.BrakeType
+- model: bikeproperties.braketype
   pk: 2
   fields:
     mount_type: PM
     brake_type: Disc
-
-- model: bikeproperties.BrakeType
+- model: bikeproperties.braketype
   pk: 3
+  fields:
+    mount_type: Center Lock
+    brake_type: Disc
+- model: bikeproperties.braketype
+  pk: 4
   fields:
     mount_type: Pivot
     brake_type: Rim

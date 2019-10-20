@@ -1,14 +1,21 @@
-- model: bikeproperties.AxleType
+
+- model: bikeproperties.axletype
   pk: 1
   fields:
     axle_type: 9x100
-
-- model: bikeproperties.AxleType
+- model: bikeproperties.axletype
   pk: 2
   fields:
     axle_type: 15x100
-
-- model: bikeproperties.AxleType
+- model: bikeproperties.axletype
   pk: 3
   fields:
     axle_type: 15x110
+- model: bikeproperties.axletype
+  pk: 4
+  fields:
+    axle_type: 12x148
+- model: bikeproperties.axletype
+  pk: 5
+  fields:
+    axle_type: 5x135

@@ -1,0 +1,25 @@
+
+- model: bikeproperties.group
+  pk: 1
+  fields:
+    name: XT
+- model: bikeproperties.group
+  pk: 2
+  fields:
+    name: Altus
+- model: bikeproperties.group
+  pk: 3
+  fields:
+    name: Deore
+- model: bikeproperties.group
+  pk: 4
+  fields:
+    name: Alivio
+- model: bikeproperties.group
+  pk: 5
+  fields:
+    name: Acera
+- model: bikeproperties.group
+  pk: 6
+  fields:
+    name: STYLO

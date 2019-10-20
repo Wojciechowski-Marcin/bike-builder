@@ -1,9 +1,17 @@
-- model: bikeproperties.Material
+
+- model: bikeproperties.material
   pk: 1
   fields:
     name: Aluminium
-
-- model: bikeproperties.Material
+- model: bikeproperties.material
   pk: 2
   fields:
     name: Carbon
+- model: bikeproperties.material
+  pk: 3
+  fields:
+    name: Steel
+- model: bikeproperties.material
+  pk: 4
+  fields:
+    name: Nickel

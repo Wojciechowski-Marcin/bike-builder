@@ -1,0 +1,21 @@
+
+- model: bikeproperties.shocktype
+  pk: 1
+  fields:
+    mount_length: 165x38
+- model: bikeproperties.shocktype
+  pk: 2
+  fields:
+    mount_length: 184x44
+- model: bikeproperties.shocktype
+  pk: 3
+  fields:
+    mount_length: 190x51
+- model: bikeproperties.shocktype
+  pk: 4
+  fields:
+    mount_length: 200x51
+- model: bikeproperties.shocktype
+  pk: 5
+  fields:
+    mount_length: 200x57

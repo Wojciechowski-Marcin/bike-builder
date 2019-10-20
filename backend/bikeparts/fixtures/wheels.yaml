@@ -1,0 +1,46 @@
+
+- model: bikeparts.wheels
+  pk: 1
+  fields:
+    brand: 11
+    group: null
+    model: Crossmax Elite
+    material: 1
+    weight: '1655.00'
+    color: 1
+    price: '412.41'
+    wheel_type: 1
+    brake_type: 2
+    axle_type: 2
+    applications:
+    - 3
+- model: bikeparts.wheels
+  pk: 2
+  fields:
+    brand: 12
+    group: null
+    model: H 1700
+    material: 1
+    weight: '2190.00'
+    color: 1
+    price: '546.78'
+    wheel_type: 2
+    brake_type: 1
+    axle_type: 3
+    applications:
+    - 3
+- model: bikeparts.wheels
+  pk: 3
+  fields:
+    brand: 12
+    group: null
+    model: E 1900
+    material: 1
+    weight: '1998.00'
+    color: 1
+    price: '298.71'
+    wheel_type: 2
+    brake_type: 4
+    axle_type: 2
+    applications:
+    - 3

@@ -1,0 +1,5 @@
+
+- model: bikeproperties.handlebartype
+  pk: 2
+  fields:
+    size: '31.8'

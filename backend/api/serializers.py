@@ -91,7 +91,7 @@ class RearDerailleurTypeSerializer(serializers.ModelSerializer):
 class BrakeRotorTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = bikeproperties.models.Application
+        model = bikeproperties.models.BrakeRotorType
         fields = ('id', 'size',)
 
 
@@ -148,13 +148,12 @@ class FrameSerializer(BikePartSerializer):
     brake_types = BrakeTypeSerializer(many=True)
     rear_derailleur_types = RearDerailleurTypeSerializer(many=True)
     front_derailleur_types = FrontDerailleurTypeSerializer(many=True)
-    brake_rotor_type = BrakeRotorTypeSerializer()
+    brake_rotor_type = BrakeRotorTypeSerializer(many=True)
 
 
     class Meta:
         model = bikeparts.models.Frame
         fields = BikePartSerializer.Meta.fields + (
-            'size',
             'wheel_types',
             'headtube_type',
             'seatclamp_type',
@@ -284,7 +283,7 @@ class HandlebarSerializer(BikePartSerializer):
 
 class StemSerializer(BikePartSerializer):
 
-    headtube_type = HeadtubeTypeSerializer()
+    headtube_type = HeadtubeTypeSerializer(many=True)
     handlebar_type = HandlebarTypeSerializer()
 
     class Meta:

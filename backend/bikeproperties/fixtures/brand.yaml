@@ -1,4 +1,52 @@
-- model: bikeproperties.Brand
+- model: bikeproperties.brand
   pk: 1
   fields:
     name: RockShox
+- model: bikeproperties.brand
+  pk: 2
+  fields:
+    name: Cube
+- model: bikeproperties.brand
+  pk: 3
+  fields:
+    name: Radon
+- model: bikeproperties.brand
+  pk: 4
+  fields:
+    name: Thompson
+- model: bikeproperties.brand
+  pk: 5
+  fields:
+    name: Shimano
+- model: bikeproperties.brand
+  pk: 6
+  fields:
+    name: Sram
+- model: bikeproperties.brand
+  pk: 7
+  fields:
+    name: Newmen
+- model: bikeproperties.brand
+  pk: 8
+  fields:
+    name: Renthal
+- model: bikeproperties.brand
+  pk: 9
+  fields:
+    name: Ritchey
+- model: bikeproperties.brand
+  pk: 10
+  fields:
+    name: Truvativ
+- model: bikeproperties.brand
+  pk: 11
+  fields:
+    name: Mavic
+- model: bikeproperties.brand
+  pk: 12
+  fields:
+    name: DT Swiss
+- model: bikeproperties.brand
+  pk: 13
+  fields:
+    name: Fox Racing

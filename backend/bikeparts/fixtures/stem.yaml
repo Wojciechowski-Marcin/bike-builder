@@ -1,0 +1,58 @@
+
+- model: bikeparts.stem
+  pk: 2
+  fields:
+    brand: 7
+    group: null
+    model: Evolution 318.4
+    material: 1
+    weight: '135.00'
+    color: 1
+    price: '50.65'
+    length: '20'
+    angle: '6'
+    headtube_type: 
+    - 1
+    handlebar_type: 2
+    applications:
+    - 1
+    - 2
+    - 3
+- model: bikeparts.stem
+  pk: 3
+  fields:
+    brand: 8
+    group: null
+    model: Apex
+    material: null
+    weight: '136.00'
+    color: 1
+    price: '82.59'
+    length: '31'
+    angle: '6'
+    headtube_type:
+    - 2
+    handlebar_type: 2
+    applications:
+    - 1
+    - 2
+    - 3
+- model: bikeparts.stem
+  pk: 4
+  fields:
+    brand: 9
+    group: null
+    model: WCS C220
+    material: 1
+    weight: '121.00'
+    color: 1
+    price: '63.00'
+    length: '120'
+    angle: '6'
+    headtube_type: 
+    - 1
+    handlebar_type: 2
+    applications:
+    - 1
+    - 2
+    - 3

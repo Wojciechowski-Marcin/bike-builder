@@ -1,0 +1,61 @@
+
+- model: bikeparts.fork
+  pk: 1
+  fields:
+    brand: 1
+    group: null
+    model: Yari RC
+    material: 1
+    weight: '2140.00'
+    color: 1
+    price: '433.08'
+    suspension_type: Air
+    travel: '120'
+    headtube_type: 2
+    axle_type: 3
+    applications:
+    - 3
+    wheel_types:
+    - 1
+    brake_types:
+    - 2
+- model: bikeparts.fork
+  pk: 2
+  fields:
+    brand: 1
+    group: null
+    model: Lyrik Ultimate
+    material: 1
+    weight: '0.00'
+    color: 2
+    price: '806.12'
+    suspension_type: Air
+    travel: '180'
+    headtube_type: 2
+    axle_type: 3
+    applications:
+    - 3
+    wheel_types:
+    - 2
+    brake_types:
+    - 2
+- model: bikeparts.fork
+  pk: 3
+  fields:
+    brand: 13
+    group: null
+    model: 36 K Float
+    material: 1
+    weight: '1956.00'
+    color: 6
+    price: '1301.42'
+    suspension_type: Air
+    travel: '160'
+    headtube_type: 2
+    axle_type: 3
+    applications:
+    - 3
+    wheel_types:
+    - 2
+    brake_types:
+    - 2

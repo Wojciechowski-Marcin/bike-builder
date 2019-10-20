@@ -1,0 +1,9 @@
+
+- model: bikeproperties.bottombrackettype
+  pk: 1
+  fields:
+    size: '68'
+- model: bikeproperties.bottombrackettype
+  pk: 2
+  fields:
+    size: '73'

@@ -1,69 +1,57 @@
-- model: bikeproperties.SpeedCompatibility
+
+- model: bikeproperties.speedcompatibility
   pk: 1
   fields:
     speed_compatibility: 3x6
-
-- model: bikeproperties.SpeedCompatibility
+- model: bikeproperties.speedcompatibility
   pk: 2
   fields:
     speed_compatibility: 3x7
-
-- model: bikeproperties.SpeedCompatibility
+- model: bikeproperties.speedcompatibility
   pk: 3
   fields:
     speed_compatibility: 3x8
-
-- model: bikeproperties.SpeedCompatibility
+- model: bikeproperties.speedcompatibility
   pk: 4
   fields:
     speed_compatibility: 3x9
-
-- model: bikeproperties.SpeedCompatibility
+- model: bikeproperties.speedcompatibility
   pk: 5
   fields:
     speed_compatibility: 3x10
-
-- model: bikeproperties.SpeedCompatibility
+- model: bikeproperties.speedcompatibility
   pk: 6
   fields:
     speed_compatibility: 3x11
-
-- model: bikeproperties.SpeedCompatibility
+- model: bikeproperties.speedcompatibility
   pk: 7
   fields:
     speed_compatibility: 2x8
-
-- model: bikeproperties.SpeedCompatibility
+- model: bikeproperties.speedcompatibility
   pk: 8
   fields:
     speed_compatibility: 2x9
-
-- model: bikeproperties.SpeedCompatibility
+- model: bikeproperties.speedcompatibility
   pk: 9
   fields:
     speed_compatibility: 2x10
-
-- model: bikeproperties.SpeedCompatibility
+- model: bikeproperties.speedcompatibility
   pk: 10
   fields:
     speed_compatibility: 2x11
-
-- model: bikeproperties.SpeedCompatibility
+- model: bikeproperties.speedcompatibility
   pk: 11
   fields:
     speed_compatibility: 2x12
-
-- model: bikeproperties.SpeedCompatibility
+- model: bikeproperties.speedcompatibility
   pk: 12
   fields:
     speed_compatibility: 1x10
-
-- model: bikeproperties.SpeedCompatibility
+- model: bikeproperties.speedcompatibility
   pk: 13
   fields:
     speed_compatibility: 1x11
-
-- model: bikeproperties.SpeedCompatibility
+- model: bikeproperties.speedcompatibility
   pk: 14
   fields:
     speed_compatibility: 1x12

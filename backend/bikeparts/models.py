@@ -73,10 +73,6 @@ class BikePart(models.Model):
 
 class Frame(BikePart):
 
-    size = models.DecimalField(
-        max_digits=3, 
-        decimal_places=1)
-
     wheel_types = models.ManyToManyField(
         bikeproperties.models.WheelType,
         related_name='frames')
@@ -108,12 +104,14 @@ class Frame(BikePart):
         bikeproperties.models.FrontDerailleurType,
         related_name='frames')
 
-    brake_rotor_type = models.ForeignKey(
-        'bikeproperties.BrakeRotorType',
+    axle_type = models.ForeignKey(
+        'bikeproperties.AxleType',
         on_delete=models.PROTECT,
-        related_name='frames',
-        null=True,
-        blank=True)
+        related_name='frames')
+
+    brake_rotor_type = models.ManyToManyField(
+        'bikeproperties.BrakeRotorType',
+        related_name='frames')
 
     recommended_fork_travel = models.DecimalField(
         max_digits=3, 
@@ -121,8 +119,12 @@ class Frame(BikePart):
         null=True,
         blank=True)
 
-    # shock_size = models.CharField(
-    #     null=True)  
+    shock_type = models.ForeignKey(
+        'bikeproperties.ShockType',
+        on_delete=models.PROTECT,
+        related_name='frames',
+        null=True,
+        blank=True)  
 
 
 class Fork(BikePart):
@@ -159,15 +161,15 @@ class Fork(BikePart):
         related_name='forks')
 
 
-# class Shock(BikePart):
+class Shock(BikePart):
 
-#     size = models.DecimalField(
-#         max_digits=, 
-#         decimal_places=,
-#         choices=)
+    shock_type = models.ForeignKey(
+        'bikeproperties.ShockType',
+        on_delete=models.PROTECT,
+        related_name='shocks')
 
-#     suspension_type = models.CharField(
-#         max_length=16)
+    suspension_type = models.CharField(
+        max_length=16)
 
 
 class Crankset(BikePart):
@@ -225,6 +227,11 @@ class RearDerailleur(BikePart):
 
 class Brake(BikePart):
 
+    material = models.ForeignKey(
+        'bikeproperties.Material',
+        on_delete=models.PROTECT,
+        related_name='brakes')
+
     brake_type = models.ForeignKey(
         'bikeproperties.BrakeType',
         on_delete=models.PROTECT,
@@ -276,9 +283,8 @@ class Stem(BikePart):
         max_digits=3, 
         decimal_places=0)
 
-    headtube_type = models.ForeignKey(
-        'bikeproperties.HeadtubeType',
-        on_delete=models.PROTECT,
+    headtube_type = models.ManyToManyField(
+        bikeproperties.models.HeadtubeType,
         related_name='stems')
 
     handlebar_type = models.ForeignKey(

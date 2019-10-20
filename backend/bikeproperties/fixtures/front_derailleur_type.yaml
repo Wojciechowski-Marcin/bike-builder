@@ -1,0 +1,13 @@
+
+- model: bikeproperties.frontderailleurtype
+  pk: 1
+  fields:
+    mount_type: Direct Mount
+- model: bikeproperties.frontderailleurtype
+  pk: 2
+  fields:
+    mount_type: Clamp
+- model: bikeproperties.frontderailleurtype
+  pk: 3
+  fields:
+    mount_type: E-Type

@@ -1,0 +1,26 @@
+
+- model: bikeproperties.brakerotortype
+  pk: 1
+  fields:
+    size: '140'
+    mount_type: Postmount
+- model: bikeproperties.brakerotortype
+  pk: 2
+  fields:
+    size: '160'
+    mount_type: Postmount
+- model: bikeproperties.brakerotortype
+  pk: 3
+  fields:
+    size: '180'
+    mount_type: Postmount
+- model: bikeproperties.brakerotortype
+  pk: 4
+  fields:
+    size: '200'
+    mount_type: Postmount
+- model: bikeproperties.brakerotortype
+  pk: 5
+  fields:
+    size: '203'
+    mount_type: Postmount

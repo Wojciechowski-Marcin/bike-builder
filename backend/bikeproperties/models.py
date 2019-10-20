@@ -171,13 +171,16 @@ class BrakeRotorType(models.Model):
     size = models.DecimalField(
         max_digits=3, 
         decimal_places=0)
+    
+    mount_type = models.CharField(
+        max_length=16)
 
     @property
     def class_name(self):
         return self.__class__.__name__
 
     def __str__(self):
-        return f'<{self.class_name}> {self.size}mm'
+        return f'<{self.class_name}> {self.mount_type} {self.size}mm'
 
 
 class AxleType(models.Model):
@@ -220,4 +223,17 @@ class HandlebarType(models.Model):
         return self.__class__.__name__
 
     def __str__(self):
-        return f'<{self.class_name}> {self.size}cm'
+        return f'<{self.class_name}> {self.size}mm'
+
+
+class ShockType(models.Model):
+
+    mount_length = models.CharField(
+        max_length=16)
+
+    @property
+    def class_name(self):
+        return self.__class__.__name__
+
+    def __str__(self):
+        return f'<{self.class_name}> {self.mount_length}mm'
