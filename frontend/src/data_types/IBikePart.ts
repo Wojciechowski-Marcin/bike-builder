@@ -13,5 +13,5 @@ export interface IBikePart {
   weight: number;
   color: IColor;
   price: number;
-  application: IApplication[];
+  applications: IApplication[];
 }

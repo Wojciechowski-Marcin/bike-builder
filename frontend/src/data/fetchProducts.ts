@@ -2,12 +2,12 @@ import {
   fetchProductsPending,
   fetchProductsSuccess,
   fetchProductsError
-} from "../actions";
+} from "../actions/fetchActions";
 
 function fetchProducts() {
   return (dispatch: any) => {
     dispatch(fetchProductsPending());
-    fetch("api/frames/")
+    fetch("api/bikeparts/")
       .then(res => res.json())
       .then(res => {
         if (res.error) {

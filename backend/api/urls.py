@@ -20,4 +20,5 @@ urlpatterns = [
     path('saddles/', views.saddle_view),
     path('seatposts/', views.seatpost_view),
     path('wheels/', views.wheels_view),
+    path('bikeparts/', views.bikepartsView.as_view()),
 ]

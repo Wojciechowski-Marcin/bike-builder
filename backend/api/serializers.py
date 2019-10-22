@@ -116,13 +116,20 @@ class HandlebarTypeSerializer(serializers.ModelSerializer):
         fields = ('id', 'size',)
 
 
+class ShockTypeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = bikeproperties.models.ShockType
+        fields = ('id', 'mount_length',)
+
+
 class BikePartSerializer(serializers.ModelSerializer):
 
     brand = BrandSerializer()
     group = GroupSerializer()
     material = MaterialSerializer()
     color = ColorSerializer()
-    application = ApplicationSerializer()
+    applications = ApplicationSerializer(many=True)
 
     class Meta:
         model = bikeparts.models.BikePart
@@ -149,7 +156,6 @@ class FrameSerializer(BikePartSerializer):
     rear_derailleur_types = RearDerailleurTypeSerializer(many=True)
     front_derailleur_types = FrontDerailleurTypeSerializer(many=True)
     brake_rotor_type = BrakeRotorTypeSerializer(many=True)
-
 
     class Meta:
         model = bikeparts.models.Frame
@@ -181,6 +187,17 @@ class ForkSerializer(BikePartSerializer):
             'headtube_type',
             'axle_type',
             'brake_types',)
+
+
+class ShockSerializer(BikePartSerializer):
+
+    shock_type = ShockTypeSerializer()
+
+    class Meta:
+        model = bikeparts.models.Shock
+        fields = BikePartSerializer.Meta.fields + (
+            'shock_type',
+            'suspension_type',)
 
 
 class CranksetSerializer(BikePartSerializer):
@@ -269,7 +286,6 @@ class RotorSerializer(BikePartSerializer):
             'brake_rotor_type',)
 
 
-
 class HandlebarSerializer(BikePartSerializer):
 
     handlebar_type = HandlebarTypeSerializer()
@@ -280,17 +296,15 @@ class HandlebarSerializer(BikePartSerializer):
             'width', 'handlebar_type',)
 
 
-
 class StemSerializer(BikePartSerializer):
 
-    headtube_type = HeadtubeTypeSerializer(many=True)
+    headtube_types = HeadtubeTypeSerializer(many=True)
     handlebar_type = HandlebarTypeSerializer()
 
     class Meta:
         model = bikeparts.models.Stem
         fields = BikePartSerializer.Meta.fields + (
-            'length', 'angle', 'headtube_type', 'handlebar_type',)
-
+            'length', 'angle', 'headtube_types', 'handlebar_type',)
 
 
 class SaddleSerializer(BikePartSerializer):
@@ -301,7 +315,6 @@ class SaddleSerializer(BikePartSerializer):
             'length', 'width')
 
 
-
 class SeatpostSerializer(BikePartSerializer):
 
     seatclamp_type = SeatclampTypeSerializer()
@@ -310,7 +323,6 @@ class SeatpostSerializer(BikePartSerializer):
         model = bikeparts.models.Seatpost
         fields = BikePartSerializer.Meta.fields + (
             'length', 'seatclamp_type', 'travel')
-
 
 
 class WheelsSerializer(BikePartSerializer):

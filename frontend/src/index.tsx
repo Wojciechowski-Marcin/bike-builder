@@ -1,26 +1,19 @@
 import "./index.css";
 import "antd/dist/antd.css";
 
-import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom";
-import thunk from "redux-thunk";
 
-import { initialState, rootReducer } from "./reducers";
 import App from "./components/App";
+import { configureStore } from "./store/index";
 
-const middlewares = [thunk];
+const store = configureStore();
 
-const store = createStore(
-  rootReducer,
-  initialState,
-  applyMiddleware(...middlewares)
-);
-
-ReactDOM.render(
+const Root = () => (
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById("root")
+  </Provider>
 );
+
+ReactDOM.render(<Root />, document.getElementById("root"));

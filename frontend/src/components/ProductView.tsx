@@ -3,14 +3,18 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import fetchProductsAction from "../data/fetchProducts";
-import { getProductsError, getProducts, getProductsPending } from "../reducers";
-import { IFrame } from "../data_types/IFrame";
+import {
+  getProductsError,
+  getProducts,
+  getProductsPending
+} from "../reducers/fetchReducer";
+import { IBikePartsAPI, IBikePartType } from "../data_types/IBikePartsAPI";
 
 interface IProps {
-  products: IFrame[];
-  error: any;
+  products: IBikePartsAPI;
+  error: Error | null;
   pending: boolean;
-  fetchProducts: any;
+  fetchProducts: () => void;
 }
 
 class ProductView_ extends Component<IProps> {
@@ -27,7 +31,6 @@ class ProductView_ extends Component<IProps> {
   shouldComponentRender() {
     const { pending } = this.props;
     if (pending === false) return false;
-    // more tests
     return true;
   }
 
@@ -36,14 +39,15 @@ class ProductView_ extends Component<IProps> {
 
     if (pending === true) return <div>"Loading"</div>;
 
-    console.log(products);
-
     return (
       <div className="product-list-wrapper">
         {error && <span className="product-list-error">{error}</span>}
-        {products.map(product => {
-          return <p key={product.id}>{JSON.stringify(product)}</p>;
-        })}
+        {products &&
+          Object.entries(products).map(([bikeparts, val]) => {
+            return val.map((bikepart: IBikePartType) => {
+              return <p key={bikepart.id}>{JSON.stringify(bikepart)}</p>;
+            });
+          })}
       </div>
     );
   }

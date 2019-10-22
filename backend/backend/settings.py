@@ -16,15 +16,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     # APPS
     'api.apps.ApiConfig',
     'bikeparts.apps.BikepartsConfig',
     'bikeproperties.apps.BikepropertiesConfig',
 
-    #LIBS
+    # LIBS
     'django_extensions',
     'rest_framework',
+    'drf_multiple_model',
 ]
 
 MIDDLEWARE = [
