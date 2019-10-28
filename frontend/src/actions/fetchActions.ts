@@ -1,25 +1,44 @@
-import { IFrame } from "../data_types/IFrame";
+import { IBikePartsAPI } from "../data_types/IBikePartsAPI";
 
-export const FETCH_PRODUCTS_PENDING = "FETCH_PRODUCTS_PENDING";
-export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
-export const FETCH_PRODUCTS_ERROR = "FETCH_PRODUCTS_ERROR";
+export const FETCH_BIKE_PARTS_PENDING = "FETCH_BIKE_PARTS_PENDING";
+export const FETCH_BIKE_PARTS_SUCCESS = "FETCH_BIKE_PARTS_SUCCESS";
+export const FETCH_BIKE_PARTS_ERROR = "FETCH_BIKE_PARTS_ERROR";
 
-export function fetchProductsPending() {
+export function fetchBikePartsPending() {
   return {
-    type: FETCH_PRODUCTS_PENDING
+    type: FETCH_BIKE_PARTS_PENDING
   };
 }
 
-export function fetchProductsSuccess(products: IFrame[]) {
+export function fetchBikePartsSuccess(bikeParts: IBikePartsAPI) {
   return {
-    type: FETCH_PRODUCTS_SUCCESS,
-    products: products
+    type: FETCH_BIKE_PARTS_SUCCESS,
+    bikeParts
   };
 }
 
-export function fetchProductsError(error: any) {
+export function fetchBikePartsError(error: Error) {
   return {
-    type: FETCH_PRODUCTS_ERROR,
-    error: error
+    type: FETCH_BIKE_PARTS_ERROR,
+    error
   };
 }
+
+interface fetchProductsPendingAction {
+  type: typeof FETCH_BIKE_PARTS_PENDING;
+}
+
+interface fetchProductsSuccessAction {
+  type: typeof FETCH_BIKE_PARTS_SUCCESS;
+  bikeParts: IBikePartsAPI;
+}
+
+interface fetchProductsErrorAction {
+  type: typeof FETCH_BIKE_PARTS_ERROR;
+  error: Error;
+}
+
+export type IFetchActionTypes =
+  | fetchProductsPendingAction
+  | fetchProductsSuccessAction
+  | fetchProductsErrorAction;

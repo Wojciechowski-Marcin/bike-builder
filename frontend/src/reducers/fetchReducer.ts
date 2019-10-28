@@ -1,20 +1,21 @@
 import {
-  FETCH_PRODUCTS_PENDING,
-  FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_ERROR
+  FETCH_BIKE_PARTS_PENDING,
+  FETCH_BIKE_PARTS_SUCCESS,
+  FETCH_BIKE_PARTS_ERROR,
+  IFetchActionTypes
 } from "../actions/fetchActions";
 import { IBikePartsAPI } from "../data_types/IBikePartsAPI";
-import { AppState } from ".";
+import { IRootState } from ".";
 
 export interface IFetchState {
   pending: boolean;
-  products: IBikePartsAPI;
+  bikeParts: IBikePartsAPI;
   error: Error | null;
 }
 
 const initialState: IFetchState = {
   pending: false,
-  products: {
+  bikeParts: {
     Frame: [],
     Fork: [],
     Shock: [],
@@ -35,20 +36,23 @@ const initialState: IFetchState = {
   error: null
 };
 
-export function fetchReducer(state = initialState, action: any): IFetchState {
+export function fetchReducer(
+  state = initialState,
+  action: IFetchActionTypes
+): IFetchState {
   switch (action.type) {
-    case FETCH_PRODUCTS_PENDING:
+    case FETCH_BIKE_PARTS_PENDING:
       return {
         ...state,
         pending: true
       };
-    case FETCH_PRODUCTS_SUCCESS:
+    case FETCH_BIKE_PARTS_SUCCESS:
       return {
         ...state,
         pending: false,
-        products: action.products
+        bikeParts: action.bikeParts
       };
-    case FETCH_PRODUCTS_ERROR:
+    case FETCH_BIKE_PARTS_ERROR:
       return {
         ...state,
         pending: false,
@@ -59,7 +63,8 @@ export function fetchReducer(state = initialState, action: any): IFetchState {
   }
 }
 
-export const getProducts = (state: AppState) => state.fetchReducer.products;
-export const getProductsPending = (state: AppState) =>
+export const getBikeParts = (state: IRootState) => state.fetchReducer.bikeParts;
+export const getBikePartsFetchPending = (state: IRootState) =>
   state.fetchReducer.pending;
-export const getProductsError = (state: AppState) => state.fetchReducer.error;
+export const getBikePartsFetchError = (state: IRootState) =>
+  state.fetchReducer.error;

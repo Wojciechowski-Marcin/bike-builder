@@ -1,16 +1,20 @@
 import React from "react";
+
 import { BikeTypeBox } from "./BikeTypeBox";
 import { BikeTypeBoxTypes } from "../data/BikeTypeBoxTypes";
+import { BudgetInput } from "./BudgetInput";
 
 export class BikeTypeSelector extends React.Component {
   render() {
     return (
-      <div className="bikeTypeSelector" style={style.bikeTypeSelector}>
-        <BikeTypeBox type={BikeTypeBoxTypes.CITY} />
-        <BikeTypeBox type={BikeTypeBoxTypes.ROAD} />
-        <BikeTypeBox type={BikeTypeBoxTypes.MTB} />
-        <BikeTypeBox type={BikeTypeBoxTypes.TREKKING} />
-      </div>
+      <>
+        <div className="bikeTypeSelector" style={style.bikeTypeSelector}>
+          {Object.entries(BikeTypeBoxTypes).map(([key, val]) => {
+            return <BikeTypeBox key={key} type={val} />;
+          })}
+        </div>
+        <BudgetInput />
+      </>
     );
   }
 }

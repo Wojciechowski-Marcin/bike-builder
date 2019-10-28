@@ -2,6 +2,7 @@ import React from "react";
 import { Layout, Menu, Typography } from "antd";
 import { BikeTypeSelector } from "./BikeTypeSelector";
 import { ProductView } from "./ProductView";
+import { BikePartSelector } from "./BikePartSelector";
 
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
@@ -22,15 +23,12 @@ function App() {
             <Menu.Item key="3">Build</Menu.Item>
           </Menu>
         </Header>
-        <Content
-          style={{
-            padding: "0 50px",
-            height: "calc(100vh - 64px)",
-            marginTop: 64
-          }}
-        >
+        <Content style={style.content}>
           <Title style={style.title}>Build your dream bike!</Title>
           <BikeTypeSelector />
+        </Content>
+        <Content style={style.content}>
+          <BikePartSelector />
         </Content>
         <div style={style.productView}>
           <ProductView />
@@ -48,6 +46,11 @@ const style = {
   },
   title: {
     margin: "48px 0 24px"
+  },
+  content: {
+    padding: "0 50px",
+    height: "calc(100vh - 64px)",
+    marginTop: 64
   },
   productView: {
     background: "#fff",

@@ -1,13 +1,15 @@
-import React from "react";
-import { getSelectedBikeType } from "../reducers/bikeTypeSelectorReducer";
+import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
-import { selectBikeType } from "../actions/bikeTypeSelectorActions";
-import { bindActionCreators } from "redux";
+import React from "react";
+
+import { getSelectedBikeType } from "../reducers/userInputReducer";
+import { selectBikeType } from "../actions/userInputActions";
+import { IRootState } from "../reducers";
 
 interface IProps {
   type: string;
   selectedBikeType: string;
-  setSelectedBikeType: (type: string) => void;
+  selectBikeType: (type: string) => void;
 }
 
 class BikeTypeBox_ extends React.Component<IProps> {
@@ -18,7 +20,7 @@ class BikeTypeBox_ extends React.Component<IProps> {
   }
 
   handleOnClick() {
-    this.props.setSelectedBikeType(this.props.type);
+    this.props.selectBikeType(this.props.type);
   }
 
   isButtonSelected() {
@@ -41,17 +43,12 @@ class BikeTypeBox_ extends React.Component<IProps> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: IRootState) => ({
   selectedBikeType: getSelectedBikeType(state)
 });
 
-const mapDispatchToProps = (dispatch: any) =>
-  bindActionCreators(
-    {
-      setSelectedBikeType: selectBikeType
-    },
-    dispatch
-  );
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators({ selectBikeType }, dispatch);
 
 export const BikeTypeBox = connect(
   mapStateToProps,

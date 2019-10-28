@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 
 import fetchProductsAction from "../data/fetchProducts";
 import {
-  getProductsError,
-  getProducts,
-  getProductsPending
+  getBikePartsFetchError,
+  getBikeParts,
+  getBikePartsFetchPending
 } from "../reducers/fetchReducer";
 import { IBikePartsAPI, IBikePartType } from "../data_types/IBikePartsAPI";
+import { IRootState } from "../reducers";
 
 interface IProps {
   products: IBikePartsAPI;
@@ -53,13 +54,13 @@ class ProductView_ extends Component<IProps> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
-  error: getProductsError(state),
-  products: getProducts(state),
-  pending: getProductsPending(state)
+const mapStateToProps = (state: IRootState) => ({
+  error: getBikePartsFetchError(state),
+  products: getBikeParts(state),
+  pending: getBikePartsFetchPending(state)
 });
 
-const mapDispatchToProps = (dispatch: any) =>
+const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       fetchProducts: fetchProductsAction

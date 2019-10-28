@@ -59,7 +59,7 @@ code {
 .bikeTypeBox.active {
   opacity: 0.75;
   font-size: 180%;
-  transform: scale(0.95);
+  transform: scale(0.9);
   color: rgb(0, 0, 0, 1);
   box-shadow: 6px 6px 3px 0px rgba(41, 128, 185, 0.1);
 }

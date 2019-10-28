@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
 import { fetchReducer } from "./fetchReducer";
-import { bikeTypeSelectorReducer } from "./bikeTypeSelectorReducer";
+import { userInputReducer } from "./userInputReducer";
 
 export const rootReducer = combineReducers({
   fetchReducer,
-  bikeTypeSelectorReducer
+  userInputReducer
 });
 
-export type AppState = ReturnType<typeof rootReducer>;
+export type IRootState = ReturnType<typeof rootReducer>;

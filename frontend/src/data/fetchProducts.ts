@@ -1,23 +1,24 @@
 import {
-  fetchProductsPending,
-  fetchProductsSuccess,
-  fetchProductsError
+  fetchBikePartsPending,
+  fetchBikePartsSuccess,
+  fetchBikePartsError
 } from "../actions/fetchActions";
+import { Dispatch } from "redux";
 
 function fetchProducts() {
-  return (dispatch: any) => {
-    dispatch(fetchProductsPending());
+  return (dispatch: Dispatch) => {
+    dispatch(fetchBikePartsPending());
     fetch("api/bikeparts/")
       .then(res => res.json())
       .then(res => {
         if (res.error) {
           throw res.error;
         }
-        dispatch(fetchProductsSuccess(res));
+        dispatch(fetchBikePartsSuccess(res));
         return res;
       })
       .catch(error => {
-        dispatch(fetchProductsError(error.name));
+        dispatch(fetchBikePartsError(error.name));
       });
   };
 }
