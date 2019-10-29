@@ -1,6 +1,6 @@
 import { IBikePart } from "./IBikePart";
-import { IWheelType } from "./IWheelType";
-import { IBrakeType } from "./IBrakeType";
+import { IWheelType } from "../bike_properties/IWheelType";
+import { IBrakeType } from "../bike_properties/IBrakeType";
 import { IAxleType } from "./IAxleType";
 
 export interface IWheels extends IBikePart {

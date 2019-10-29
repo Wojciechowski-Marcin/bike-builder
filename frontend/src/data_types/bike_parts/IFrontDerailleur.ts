@@ -1,6 +1,6 @@
 import { IBikePart } from "./IBikePart";
-import { ISpeedCompatibility } from "./ISpeedCompatibility";
-import { IFrontDerailleurType } from "./IFrontDerailleurType";
+import { ISpeedCompatibility } from "../bike_properties/ISpeedCompatibility";
+import { IFrontDerailleurType } from "../bike_properties/IFrontDerailleurType";
 
 export interface IFrontDerailleur extends IBikePart {
   speed_compatibilities: ISpeedCompatibility[];

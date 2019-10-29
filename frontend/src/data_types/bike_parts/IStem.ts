@@ -1,6 +1,6 @@
 import { IBikePart } from "./IBikePart";
-import { IHeadtubeType } from "./IHeadtubeType";
-import { IHandlebarType } from "./IHandlebarType";
+import { IHeadtubeType } from "../bike_properties/IHeadtubeType";
+import { IHandlebarType } from "../bike_properties/IHandlebarType";
 
 export interface IStem extends IBikePart {
   length: number;

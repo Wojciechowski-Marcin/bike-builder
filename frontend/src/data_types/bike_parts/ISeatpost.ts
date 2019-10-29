@@ -1,5 +1,5 @@
 import { IBikePart } from "./IBikePart";
-import { ISeatclampType } from "./ISeatclampType";
+import { ISeatclampType } from "../bike_properties/ISeatclampType";
 
 export interface ISeatpost extends IBikePart {
   length: number;

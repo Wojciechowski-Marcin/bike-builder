@@ -1,6 +1,6 @@
 import { IBikePart } from "./IBikePart";
-import { ISpeedCompatibility } from "./ISpeedCompatibility";
-import { IBottomBracketType } from "./IBottomBracketType";
+import { ISpeedCompatibility } from "../bike_properties/ISpeedCompatibility";
+import { IBottomBracketType } from "../bike_properties/IBottomBracketType";
 
 export interface ICrankset extends IBikePart {
   gradiation: string;

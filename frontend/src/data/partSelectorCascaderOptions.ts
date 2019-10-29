@@ -1,5 +1,5 @@
 import { IBikePartsAPI } from "../data_types/IBikePartsAPI";
-import { IBikePart } from "../data_types/IBikePart";
+import { IBikePart } from "../data_types/bike_parts/IBikePart";
 import { CascaderOptionType } from "antd/lib/cascader";
 
 export function getCascaderOptions(bikeParts: IBikePartsAPI) {

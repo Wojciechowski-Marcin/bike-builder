@@ -1,19 +1,19 @@
-import { IBrake } from "./IBrake";
-import { IBrakeLever } from "./IBrakeLever";
-import { ICassette } from "./ICassette";
-import { ICrankset } from "./ICrankset";
-import { IDerailleurLever } from "./IDerailleurLever";
-import { IFork } from "./IFork";
-import { IFrame } from "./IFrame";
-import { IFrontDerailleur } from "./IFrontDerailleur";
-import { IHandlebar } from "./IHandlebar";
-import { IRearDerailleur } from "./IRearDerailleur";
-import { IRotor } from "./IRotor";
-import { ISaddle } from "./ISaddle";
-import { ISeatpost } from "./ISeatpost";
-import { IShock } from "./IShock";
-import { IStem } from "./IStem";
-import { IWheels } from "./IWheels";
+import { IBrake } from "./bike_parts/IBrake";
+import { IBrakeLever } from "./bike_parts/IBrakeLever";
+import { ICassette } from "./bike_parts/ICassette";
+import { ICrankset } from "./bike_parts/ICrankset";
+import { IDerailleurLever } from "./bike_parts/IDerailleurLever";
+import { IFork } from "./bike_parts/IFork";
+import { IFrame } from "./bike_parts/IFrame";
+import { IFrontDerailleur } from "./bike_parts/IFrontDerailleur";
+import { IHandlebar } from "./bike_parts/IHandlebar";
+import { IRearDerailleur } from "./bike_parts/IRearDerailleur";
+import { IRotor } from "./bike_parts/IRotor";
+import { ISaddle } from "./bike_parts/ISaddle";
+import { ISeatpost } from "./bike_parts/ISeatpost";
+import { IShock } from "./bike_parts/IShock";
+import { IStem } from "./bike_parts/IStem";
+import { IWheels } from "./bike_parts/IWheels";
 
 export interface IBikePartsAPI {
   Frame: IFrame[];

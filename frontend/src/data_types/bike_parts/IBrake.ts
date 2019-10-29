@@ -1,6 +1,6 @@
 import { IBikePart } from "./IBikePart";
-import { IMaterial } from "./IMaterial";
-import { IBrakeType } from "./IBrakeType";
+import { IMaterial } from "../bike_properties/IMaterial";
+import { IBrakeType } from "../bike_properties/IBrakeType";
 
 export interface IBrake extends IBikePart {
   pad_material: IMaterial;

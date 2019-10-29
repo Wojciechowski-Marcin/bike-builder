@@ -1,5 +1,5 @@
 import { IBikePart } from "./IBikePart";
-import { ISpeedCompatibility } from "./ISpeedCompatibility";
+import { ISpeedCompatibility } from "../bike_properties/ISpeedCompatibility";
 
 export interface ICassette extends IBikePart {
   gradiation: string;
