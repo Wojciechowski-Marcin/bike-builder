@@ -1,35 +1,74 @@
 import { IBikePartsAPI } from "../data_types/IBikePartsAPI";
 import { IBikePart } from "../data_types/bike_parts/IBikePart";
 import { CascaderOptionType } from "antd/lib/cascader";
+import { IBikeBuild } from "../data_types/IBikeBuild";
 
-export function getCascaderOptions(bikeParts: IBikePartsAPI) {
-  interface IReturnValue {
-    [key: string]: CascaderOptionType[];
-  }
-  let returnValue: IReturnValue = {};
-  Object.entries(bikeParts).map(([label, parts]) => {
-    returnValue[label] = getBikepartCascaderOptions(parts);
-    return null;
-  });
-  return returnValue;
+interface IBikePartSelectorData {
+  [key: string]: IPartSelectorData;
 }
 
-export function getBikepartCascaderOptions(bikeParts: IBikePart[]) {
+export interface IPartSelectorData {
+  availableParts: IBikePart[];
+  options: CascaderOptionType[];
+}
+
+export function getBikePartSelectorData(
+  bikePartsAPI: IBikePartsAPI,
+  selectedApplicationName: string,
+  budget: number,
+  bikeBuild: IBikeBuild
+) {
+  let cascaderOptions: IBikePartSelectorData = {};
+  Object.entries(bikePartsAPI).map(
+    ([label, bikeParts]) =>
+      (cascaderOptions[label] = {
+        availableParts: bikeParts,
+        options: getBikepartCascaderOptions(
+          bikeParts,
+          selectedApplicationName,
+          budget,
+          bikeBuild,
+          label
+        )
+      })
+  );
+  return cascaderOptions;
+}
+
+export function getBikepartCascaderOptions(
+  bikeParts: IBikePart[],
+  selectedApplicationName: string,
+  budget: number,
+  bikeBuild: IBikeBuild,
+  label: string
+) {
   let returnArray: CascaderOptionType[] = [
     {
       value: "0",
       label: "None"
     }
   ];
+
+  const selectedBikePartPrice = bikeBuild[label].price;
+
   bikeParts.forEach(bikePart => {
-    returnArray.push(getFrame(bikePart));
+    const isApplicationSelected = bikePart.applications.some(
+      application => application.name === selectedApplicationName
+    );
+    const isLowerThanBudget = bikePart.price < budget + selectedBikePartPrice;
+
+    if (isApplicationSelected && isLowerThanBudget)
+      returnArray.push(mapBikePartToCascaderOption(bikePart));
   });
-  return returnArray;
+
+  return returnArray.length > 1
+    ? returnArray
+    : [{ value: "0", label: "Your budget is out! :(" }];
 }
 
-function getFrame(bikePart: IBikePart) {
+function mapBikePartToCascaderOption(bikePart: IBikePart) {
   return {
     value: `${bikePart.id}`,
-    label: bikePart.brand.name + bikePart.model
+    label: `${bikePart.brand.name} ${bikePart.model} ${bikePart.price}`
   };
 }

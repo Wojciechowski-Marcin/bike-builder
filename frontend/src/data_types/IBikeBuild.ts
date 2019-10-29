@@ -1,3 +1,8 @@
 export interface IBikeBuild {
-  [key: string]: number;
+  [key: string]: ISelectedBikePart;
+}
+
+interface ISelectedBikePart {
+  id: number;
+  price: number;
 }

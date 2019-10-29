@@ -16,7 +16,24 @@ export interface IUserInputState {
 const initialState: IUserInputState = {
   budget: 0,
   bikeType: "",
-  bikeBuild: {}
+  bikeBuild: {
+    Frame: { id: 0, price: 0.0 },
+    Fork: { id: 0, price: 0.0 },
+    Shock: { id: 0, price: 0.0 },
+    Crankset: { id: 0, price: 0.0 },
+    Cassette: { id: 0, price: 0.0 },
+    FrontDerailleur: { id: 0, price: 0.0 },
+    RearDerailleur: { id: 0, price: 0.0 },
+    Brake: { id: 0, price: 0.0 },
+    BrakeLever: { id: 0, price: 0.0 },
+    DerailleurLever: { id: 0, price: 0.0 },
+    Rotor: { id: 0, price: 0.0 },
+    Stem: { id: 0, price: 0.0 },
+    Saddle: { id: 0, price: 0.0 },
+    Seatpost: { id: 0, price: 0.0 },
+    Handlebar: { id: 0, price: 0.0 },
+    Wheels: { id: 0, price: 0.0 }
+  }
 };
 
 export function userInputReducer(
@@ -50,3 +67,5 @@ export function userInputReducer(
 export const getBudget = (state: IRootState) => state.userInputReducer.budget;
 export const getSelectedBikeType = (state: IRootState) =>
   state.userInputReducer.bikeType;
+export const getBikeBuild = (state: IRootState) =>
+  state.userInputReducer.bikeBuild;

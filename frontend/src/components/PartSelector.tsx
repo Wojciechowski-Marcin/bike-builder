@@ -1,15 +1,16 @@
 import React from "react";
 import { Cascader, Typography } from "antd";
-import { CascaderOptionType } from "antd/lib/cascader";
 
 import { IBikeBuild } from "../data_types/IBikeBuild";
+import { IPartSelectorData } from "../data/partSelectorCascaderOptions";
 
 const { Title } = Typography;
 
 interface IProps {
-  options: CascaderOptionType[];
-  label: string;
   actionKey: string;
+  currentPrice: number;
+  label: string;
+  partSelectorData: IPartSelectorData;
   changeBikeBuild: (bikeBuild: IBikeBuild) => void;
 }
 
@@ -17,11 +18,25 @@ export class PartSelector extends React.Component<IProps> {
   constructor(props: IProps) {
     super(props);
     this.onChange = this.onChange.bind(this);
+    this.getPartPriceById = this.getPartPriceById.bind(this);
+  }
+
+  getPartPriceById(id: number) {
+    return this.props.partSelectorData.availableParts.find(
+      part => part.id === id
+    )!.price;
   }
 
   onChange(value: string[]) {
+    const currentSelectedPartId = parseInt(value[0]);
+    const currentSelectedPartPrice =
+      currentSelectedPartId && this.getPartPriceById(currentSelectedPartId);
+
     let bikeBuild: IBikeBuild = {};
-    bikeBuild[this.props.label] = parseInt(value[0]);
+    bikeBuild[this.props.label] = {
+      id: currentSelectedPartId,
+      price: +currentSelectedPartPrice
+    };
     this.props.changeBikeBuild(bikeBuild);
   }
 
@@ -33,9 +48,10 @@ export class PartSelector extends React.Component<IProps> {
         </Title>
         <Cascader
           defaultValue={["0"]}
-          options={this.props.options}
+          options={this.props.partSelectorData.options}
           onChange={this.onChange}
           style={style.cascader}
+          allowClear={false}
         />
       </div>
     );
