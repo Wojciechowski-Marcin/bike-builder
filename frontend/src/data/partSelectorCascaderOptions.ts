@@ -15,7 +15,12 @@ export function getCascaderOptions(bikeParts: IBikePartsAPI) {
 }
 
 export function getBikepartCascaderOptions(bikeParts: IBikePart[]) {
-  let returnArray: CascaderOptionType[] = [];
+  let returnArray: CascaderOptionType[] = [
+    {
+      value: "0",
+      label: "None"
+    }
+  ];
   bikeParts.forEach(bikePart => {
     returnArray.push(getFrame(bikePart));
   });

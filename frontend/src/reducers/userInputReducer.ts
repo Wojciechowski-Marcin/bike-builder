@@ -1,18 +1,22 @@
 import {
   CHANGE_BUDGET,
   SELECT_BIKE_TYPE,
+  CHANGE_BIKE_BUILD,
   IUserInputActionTypes
 } from "../actions/userInputActions";
 import { IRootState } from ".";
+import { IBikeBuild } from "../data_types/IBikeBuild";
 
 export interface IUserInputState {
   budget: number;
   bikeType: string;
+  bikeBuild: IBikeBuild;
 }
 
 const initialState: IUserInputState = {
   budget: 0,
-  bikeType: ""
+  bikeType: "",
+  bikeBuild: {}
 };
 
 export function userInputReducer(
@@ -29,6 +33,14 @@ export function userInputReducer(
       return {
         ...state,
         bikeType: action.bikeType
+      };
+    case CHANGE_BIKE_BUILD:
+      return {
+        ...state,
+        bikeBuild: {
+          ...state.bikeBuild,
+          ...action.bikeBuild
+        }
       };
     default:
       return state;

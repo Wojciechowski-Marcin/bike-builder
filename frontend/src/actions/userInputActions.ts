@@ -1,5 +1,8 @@
+import { IBikeBuild } from "../data_types/IBikeBuild";
+
 export const CHANGE_BUDGET = "CHANGE_BUDGET";
 export const SELECT_BIKE_TYPE = "SELECT_BIKE_TYPE";
+export const CHANGE_BIKE_BUILD = "CHANGE_BIKE_BUILD";
 
 export function changeBudget(budget: number) {
   return {
@@ -15,6 +18,13 @@ export function selectBikeType(bikeType: string) {
   };
 }
 
+export function changeBikeBuild(bikeBuild: IBikeBuild) {
+  return {
+    type: CHANGE_BIKE_BUILD,
+    bikeBuild
+  };
+}
+
 interface changeBudgetAction {
   type: typeof CHANGE_BUDGET;
   budget: number;
@@ -25,4 +35,12 @@ interface selectBikeTypeAction {
   bikeType: string;
 }
 
-export type IUserInputActionTypes = changeBudgetAction | selectBikeTypeAction;
+interface changeBikeBuildAction {
+  type: typeof CHANGE_BIKE_BUILD;
+  bikeBuild: IBikeBuild;
+}
+
+export type IUserInputActionTypes =
+  | changeBudgetAction
+  | selectBikeTypeAction
+  | changeBikeBuildAction;
