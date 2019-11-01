@@ -3,6 +3,7 @@ import { Cascader, Typography } from "antd";
 
 import { IBikeBuild } from "../data_types/IBikeBuild";
 import { IPartSelectorData } from "../data/partSelectorCascaderOptions";
+import { CascaderOptionType } from "antd/lib/cascader";
 
 const { Title } = Typography;
 
@@ -39,6 +40,21 @@ export class PartSelector extends React.Component<IProps> {
     };
     this.props.changeBikeBuild(bikeBuild);
   }
+  filter(inputValue: string, path: CascaderOptionType[]) {
+    return true;
+  }
+
+  cascaderRender(inputValue: string, path: CascaderOptionType[]) {
+    return path[0];
+  }
+
+  sort() {
+    return 0;
+  }
+
+  displayRender(label: string[]) {
+    return label[0];
+  }
 
   render() {
     return (
@@ -52,6 +68,12 @@ export class PartSelector extends React.Component<IProps> {
           onChange={this.onChange}
           style={style.cascader}
           allowClear={false}
+          showSearch={{
+            filter: this.filter,
+            render: this.cascaderRender,
+            sort: this.sort
+          }}
+          displayRender={this.displayRender}
         />
       </div>
     );
@@ -68,6 +90,7 @@ const style = {
     margin: "auto 5px"
   },
   cascader: {
-    margin: "auto 5px"
-  }
+    margin: "auto 5px",
+    textAlign: "left"
+  } as React.CSSProperties
 };

@@ -2,6 +2,7 @@ import { IBikePartsAPI } from "../data_types/IBikePartsAPI";
 import { IBikePart } from "../data_types/bike_parts/IBikePart";
 import { CascaderOptionType } from "antd/lib/cascader";
 import { IBikeBuild } from "../data_types/IBikeBuild";
+import { mapBikePartToCascaderOption } from "./mapBikePartToCascaderOption";
 
 interface IBikePartSelectorData {
   [key: string]: IPartSelectorData;
@@ -35,7 +36,7 @@ export function getBikePartSelectorData(
   return cascaderOptions;
 }
 
-export function getBikepartCascaderOptions(
+function getBikepartCascaderOptions(
   bikeParts: IBikePart[],
   selectedApplicationName: string,
   budget: number,
@@ -45,7 +46,7 @@ export function getBikepartCascaderOptions(
   let returnArray: CascaderOptionType[] = [
     {
       value: "0",
-      label: "None"
+      label: "Not selected"
     }
   ];
 
@@ -64,11 +65,4 @@ export function getBikepartCascaderOptions(
   return returnArray.length > 1
     ? returnArray
     : [{ value: "0", label: "Your budget is out! :(" }];
-}
-
-function mapBikePartToCascaderOption(bikePart: IBikePart) {
-  return {
-    value: `${bikePart.id}`,
-    label: `${bikePart.brand.name} ${bikePart.model} ${bikePart.price}`
-  };
 }

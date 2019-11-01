@@ -83,7 +83,7 @@ class BikePartSelector_ extends React.Component<IProps, IState> {
           ([label, partSelectorData]) => {
             return (
               <PartSelector
-                key={label}
+                key={`partSelector-${label}`}
                 actionKey={label}
                 changeBikeBuild={this.props.changeBikeBuild}
                 currentPrice={this.props.bikeBuild[label].price}
