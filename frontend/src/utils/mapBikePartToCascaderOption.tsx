@@ -1,7 +1,7 @@
 import React from "react";
 
 import { IBikePart } from "../data_types/bike_parts/IBikePart";
-import { BikePartCascaderOption } from "../components/BikePartCascaderOption";
+import { BikePartCascaderOption } from "../components/bikePartSelector/BikePartCascaderOption";
 
 function objectToHTML(object: Object, skip_id = false, only_values = false) {
   // TODO Fix popover
@@ -15,7 +15,7 @@ function objectToHTML(object: Object, skip_id = false, only_values = false) {
         <p key={key}>
           {only_values
             ? value.toString()
-            : `${keyUpperFirstLetter}: ${value.toString()}`}
+            : `${keyUpperFirstLetter.replace(/_/g, " ")}: ${value.toString()}`}
         </p>
       ) : (
         ""
@@ -42,6 +42,6 @@ export function mapBikePartToCascaderOption(bikePart: IBikePart) {
       >
         {bikePartName}
       </BikePartCascaderOption>
-    )
+    ),
   };
 }

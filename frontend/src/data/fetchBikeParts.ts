@@ -1,11 +1,11 @@
 import {
   fetchBikePartsPending,
   fetchBikePartsSuccess,
-  fetchBikePartsError
-} from "../actions/fetchActions";
+  fetchBikePartsError,
+} from "../actions/fetchBikePartsActions";
 import { Dispatch } from "redux";
 
-function fetchProducts() {
+export function fetchBikeParts() {
   return (dispatch: Dispatch) => {
     dispatch(fetchBikePartsPending());
     fetch("api/bikeparts/")
@@ -18,9 +18,7 @@ function fetchProducts() {
         return res;
       })
       .catch(error => {
-        dispatch(fetchBikePartsError(error.name));
+        dispatch(fetchBikePartsError(error));
       });
   };
 }
-
-export default fetchProducts;

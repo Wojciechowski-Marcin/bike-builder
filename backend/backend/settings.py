@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'bikeparts.apps.BikepartsConfig',
     'bikeproperties.apps.BikepropertiesConfig',
+    'builder.apps.BuilderConfig',
 
     # LIBS
     'django_extensions',

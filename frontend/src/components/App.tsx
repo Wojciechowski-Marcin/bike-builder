@@ -1,8 +1,8 @@
 import React from "react";
+
 import { Layout, Menu, Typography } from "antd";
-import { BikeTypeSelector } from "./BikeTypeSelector";
-import { ProductView } from "./ProductView";
-import { BikePartSelector } from "./BikePartSelector";
+import { BikeTypeSelector } from "./bikeType/BikeTypeSelector";
+import { BikePartSelectorContainer } from "./bikePartSelector/BikePartSelectorContainer";
 
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
@@ -28,11 +28,8 @@ function App() {
           <BikeTypeSelector />
         </Content>
         <Content style={style.content}>
-          <BikePartSelector />
+          <BikePartSelectorContainer />
         </Content>
-        <div style={style.productView}>
-          <ProductView />
-        </div>
         <Footer>Marcin Wojciechowski ©2019</Footer>
       </Layout>
     </div>
@@ -42,27 +39,23 @@ function App() {
 const style = {
   menu: {
     lineHeight: "64px",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   title: {
-    margin: "48px 0 24px"
+    margin: "48px 0 24px",
   },
   content: {
     padding: "0 50px",
     height: "calc(100vh - 64px)",
-    marginTop: 64
-  },
-  productView: {
-    background: "#fff",
-    padding: 24,
-    height: "auto"
-  },
+    marginTop: 64,
+    textAlign: "center",
+  } as React.CSSProperties,
   header: {
     position: "fixed",
     width: "100%",
     zIndex: 1,
-    backgroundColor: "white"
-  } as React.CSSProperties
+    backgroundColor: "white",
+  } as React.CSSProperties,
 };
 
 export default App;

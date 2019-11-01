@@ -5,6 +5,9 @@ from api import views
 
 
 urlpatterns = [
+    path('builder/', views.builder_view),
+
+    # Database GET api
     path('frames/', views.frame_view),
     path('forks/', views.fork_view),
     path('cranksets/', views.crankset_view),

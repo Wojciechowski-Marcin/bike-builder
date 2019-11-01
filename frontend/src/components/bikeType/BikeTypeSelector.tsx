@@ -1,7 +1,7 @@
 import React from "react";
 
 import { BikeTypeBox } from "./BikeTypeBox";
-import { BikeTypeBoxTypes } from "../data/BikeTypeBoxTypes";
+import { BikeTypeBoxTypes } from "../../data_types/BikeTypeBoxTypes";
 import { BudgetInput } from "./BudgetInput";
 
 export class BikeTypeSelector extends React.Component {

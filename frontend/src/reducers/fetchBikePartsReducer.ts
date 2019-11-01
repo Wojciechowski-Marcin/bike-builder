@@ -2,8 +2,8 @@ import {
   FETCH_BIKE_PARTS_PENDING,
   FETCH_BIKE_PARTS_SUCCESS,
   FETCH_BIKE_PARTS_ERROR,
-  IFetchActionTypes
-} from "../actions/fetchActions";
+  IFetchBikePartsActionTypes
+} from "../actions/fetchBikePartsActions";
 import { IBikePartsAPI } from "../data_types/IBikePartsAPI";
 import { IRootState } from ".";
 
@@ -36,9 +36,9 @@ const initialState: IFetchState = {
   error: null
 };
 
-export function fetchReducer(
+export function fetchBikePartsReducer(
   state = initialState,
-  action: IFetchActionTypes
+  action: IFetchBikePartsActionTypes
 ): IFetchState {
   switch (action.type) {
     case FETCH_BIKE_PARTS_PENDING:
@@ -63,8 +63,9 @@ export function fetchReducer(
   }
 }
 
-export const getBikeParts = (state: IRootState) => state.fetchReducer.bikeParts;
-export const getBikePartsFetchPending = (state: IRootState) =>
-  state.fetchReducer.pending;
-export const getBikePartsFetchError = (state: IRootState) =>
-  state.fetchReducer.error;
+export const getFetchBikePartsResult = (state: IRootState) =>
+  state.fetchBikePartsReducer.bikeParts;
+export const getFetchBikePartsPending = (state: IRootState) =>
+  state.fetchBikePartsReducer.pending;
+export const getFetchBikePartsError = (state: IRootState) =>
+  state.fetchBikePartsReducer.error;

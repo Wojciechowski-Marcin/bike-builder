@@ -4,7 +4,7 @@ import { CascaderOptionType } from "antd/lib/cascader";
 import { IBikeBuild } from "../data_types/IBikeBuild";
 import { mapBikePartToCascaderOption } from "./mapBikePartToCascaderOption";
 
-interface IBikePartSelectorData {
+export interface IBikePartSelectorData {
   [key: string]: IPartSelectorData;
 }
 
@@ -17,7 +17,7 @@ export function getBikePartSelectorData(
   bikePartsAPI: IBikePartsAPI,
   selectedApplicationName: string,
   budget: number,
-  bikeBuild: IBikeBuild
+  bikeBuild: IBikeBuild,
 ) {
   let cascaderOptions: IBikePartSelectorData = {};
   Object.entries(bikePartsAPI).map(
@@ -29,32 +29,35 @@ export function getBikePartSelectorData(
           selectedApplicationName,
           budget,
           bikeBuild,
-          label
-        )
-      })
+          label,
+        ),
+      }),
   );
   return cascaderOptions;
 }
+
+export const NoAvailablePartsText = "Your budget is out! :(";
+export const PartNotSelectedText = "Not selected";
 
 function getBikepartCascaderOptions(
   bikeParts: IBikePart[],
   selectedApplicationName: string,
   budget: number,
   bikeBuild: IBikeBuild,
-  label: string
+  label: string,
 ) {
   let returnArray: CascaderOptionType[] = [
     {
       value: "0",
-      label: "Not selected"
-    }
+      label: PartNotSelectedText,
+    },
   ];
 
   const selectedBikePartPrice = bikeBuild[label].price;
 
   bikeParts.forEach(bikePart => {
     const isApplicationSelected = bikePart.applications.some(
-      application => application.name === selectedApplicationName
+      application => application.name === selectedApplicationName,
     );
     const isLowerThanBudget = bikePart.price < budget + selectedBikePartPrice;
 
@@ -64,5 +67,5 @@ function getBikepartCascaderOptions(
 
   return returnArray.length > 1
     ? returnArray
-    : [{ value: "0", label: "Your budget is out! :(" }];
+    : [{ value: "0", label: NoAvailablePartsText }];
 }

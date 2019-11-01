@@ -6,12 +6,44 @@ from rest_framework.renderers import JSONRenderer
 import bikeparts.models
 import bikeproperties.models
 from api import serializers
+from builder.builder import Builder
 
 
-# def test(request):
-#     text=request.GET.get("text", ""),
+def builder_view(request):
+    '''
+    Builds bike based on given input
+    User can specify his budget, 
+    type of bike to build and choose must have parts
 
-#     return JsonResponse({"test": len(text)})
+    Request paremeters:
+        budget          number
+        biketype       string
+        frame,fork...   number (id of given part)
+    '''
+
+    if request.method == 'GET':
+        budget = request.GET.get("budget", 0)
+        bike_type = request.GET.get("biketype", "")
+        bike_parts = {
+            'frame': int(request.GET.get("frame", -1)),
+            'fork': int(request.GET.get("fork", -1)),
+            'crankset': int(request.GET.get("crankset", -1)),
+            'cassette': int(request.GET.get("cassette", -1)),
+            'frontderailleur': int(request.GET.get("frontderailleur", -1)),
+            'rearderailleur': int(request.GET.get("rearderailleur", -1)),
+            'brake': int(request.GET.get("brake", -1)),
+            'brakelever': int(request.GET.get("brakelever", -1)),
+            'derailleurlevers': int(request.GET.get("derailleurlevers", -1)),
+            'rotor': int(request.GET.get("rotor", -1)),
+            'handlebar': int(request.GET.get("handlebar", -1)),
+            'stems': int(request.GET.get("stems", -1)),
+            'saddle': int(request.GET.get("saddle", -1)),
+            'seatposts': int(request.GET.get("seatposts", -1)),
+            'wheels': int(request.GET.get("wheels", -1)),
+        }
+        builder = Builder(budget, bike_type, bike_parts)
+
+        return builder.make_response()
 
 
 def serialize_all_models(cls, serializer):

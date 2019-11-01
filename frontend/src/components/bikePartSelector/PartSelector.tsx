@@ -1,9 +1,12 @@
 import React from "react";
 import { Cascader, Typography } from "antd";
 
-import { IBikeBuild } from "../data_types/IBikeBuild";
-import { IPartSelectorData } from "../data/partSelectorCascaderOptions";
-import { CascaderOptionType } from "antd/lib/cascader";
+import { IBikeBuild } from "../../data_types/IBikeBuild";
+import {
+  IPartSelectorData,
+  NoAvailablePartsText,
+  PartNotSelectedText,
+} from "../../utils/partSelectorCascaderOptions";
 
 const { Title } = Typography;
 
@@ -24,7 +27,7 @@ export class PartSelector extends React.Component<IProps> {
 
   getPartPriceById(id: number) {
     return this.props.partSelectorData.availableParts.find(
-      part => part.id === id
+      part => part.id === id,
     )!.price;
   }
 
@@ -36,24 +39,31 @@ export class PartSelector extends React.Component<IProps> {
     let bikeBuild: IBikeBuild = {};
     bikeBuild[this.props.label] = {
       id: currentSelectedPartId,
-      price: +currentSelectedPartPrice
+      price: +currentSelectedPartPrice,
     };
     this.props.changeBikeBuild(bikeBuild);
   }
-  filter(inputValue: string, path: CascaderOptionType[]) {
-    return true;
-  }
 
-  cascaderRender(inputValue: string, path: CascaderOptionType[]) {
-    return path[0];
-  }
+  displayRender(labels: string[]) {
+    const label = labels[0];
+    let cascaderLabelStyle = {};
 
-  sort() {
-    return 0;
-  }
-
-  displayRender(label: string[]) {
-    return label[0];
+    switch (label) {
+      case NoAvailablePartsText:
+        cascaderLabelStyle = style.cascaderLabelNoParts;
+        break;
+      case PartNotSelectedText:
+        cascaderLabelStyle = style.cascaderLabelNotSelected;
+        break;
+      default:
+        cascaderLabelStyle = style.cascaderLabelValid;
+        break;
+    }
+    return (
+      <span className="cascaderLabel" style={cascaderLabelStyle}>
+        {labels[0]}
+      </span>
+    );
   }
 
   render() {
@@ -68,11 +78,6 @@ export class PartSelector extends React.Component<IProps> {
           onChange={this.onChange}
           style={style.cascader}
           allowClear={false}
-          showSearch={{
-            filter: this.filter,
-            render: this.cascaderRender,
-            sort: this.sort
-          }}
           displayRender={this.displayRender}
         />
       </div>
@@ -81,16 +86,31 @@ export class PartSelector extends React.Component<IProps> {
 }
 
 const style = {
+  cascaderLabelNoParts: {
+    borderBottom: "1px solid rgba(240,47,23,0.5)",
+    background:
+      "radial-gradient(ellipse at center, rgba(254,238,236,1) 0%, rgba(255,255,255,1) 100%)",
+  },
+  cascaderLabelNotSelected: {
+    borderBottom: "1px solid rgba(148,148,148,0.5)",
+    background:
+      "radial-gradient(ellipse at center, rgba(217,217,217,1) 0%, rgba(255,255,255,1) 100%)",
+  },
+  cascaderLabelValid: {
+    borderBottom: "1px solid rgba(30,214,73,0.5)",
+    background:
+      "radial-gradient(ellipse at center, rgba(206,248,216,1) 0%, rgba(255,255,255,1) 100%)",
+  },
   partSelector: {
     display: "flex",
     justifyContent: "center",
-    margin: "5px"
+    margin: "5px",
   },
   title: {
-    margin: "auto 5px"
+    margin: "auto 5px",
   },
   cascader: {
     margin: "auto 5px",
-    textAlign: "left"
-  } as React.CSSProperties
+    textAlign: "left",
+  } as React.CSSProperties,
 };

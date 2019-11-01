@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { InputNumber, Typography } from "antd";
 import React from "react";
 
-import { changeBudget } from "../actions/userInputActions";
-import { getBudget } from "../reducers/userInputReducer";
-import { IRootState } from "../reducers";
+import { changeBudget } from "../../actions/userInputActions";
+import { getBudget } from "../../reducers/userInputReducer";
+import { IRootState } from "../../reducers";
 
 const { Title } = Typography;
 

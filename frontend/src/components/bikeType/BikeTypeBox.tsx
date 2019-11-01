@@ -2,9 +2,9 @@ import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import React from "react";
 
-import { getSelectedBikeType } from "../reducers/userInputReducer";
-import { selectBikeType } from "../actions/userInputActions";
-import { IRootState } from "../reducers";
+import { getSelectedBikeType } from "../../reducers/userInputReducer";
+import { selectBikeType } from "../../actions/userInputActions";
+import { IRootState } from "../../reducers";
 
 interface IProps {
   type: string;

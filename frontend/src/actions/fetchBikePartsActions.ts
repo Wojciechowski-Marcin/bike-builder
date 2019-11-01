@@ -24,21 +24,21 @@ export function fetchBikePartsError(error: Error) {
   };
 }
 
-interface fetchProductsPendingAction {
+interface fetchBikePartsPendingActionType {
   type: typeof FETCH_BIKE_PARTS_PENDING;
 }
 
-interface fetchProductsSuccessAction {
+interface fetchBikePartsSuccessActionType {
   type: typeof FETCH_BIKE_PARTS_SUCCESS;
   bikeParts: IBikePartsAPI;
 }
 
-interface fetchProductsErrorAction {
+interface fetchBikePartsErrorActionType {
   type: typeof FETCH_BIKE_PARTS_ERROR;
   error: Error;
 }
 
-export type IFetchActionTypes =
-  | fetchProductsPendingAction
-  | fetchProductsSuccessAction
-  | fetchProductsErrorAction;
+export type IFetchBikePartsActionTypes =
+  | fetchBikePartsPendingActionType
+  | fetchBikePartsSuccessActionType
+  | fetchBikePartsErrorActionType;
