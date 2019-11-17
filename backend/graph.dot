@@ -1,7 +1,7 @@
 digraph model_graph {
   // Dotfile by Django-Extensions graph_models
-  // Created: 2019-10-12 17:02
-  // Cli Options: -a
+  // Created: 2019-11-17 19:49
+  // Cli Options: -a -o my_project_visualized.png --dot
 
   fontname = "Roboto"
   fontsize = 8
@@ -574,7 +574,15 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>bottom_bracket_size</B></FONT>
+    <FONT FACE="Roboto"><B>axle_type</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>bottom_bracket_type</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -606,7 +614,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>headtube</B></FONT>
+    <FONT FACE="Roboto"><B>headtube_type</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -622,17 +630,17 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><B>max_brake_rotor_size</B></FONT>
+    <FONT FACE="Roboto"><B>seatclamp_type</B></FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
   
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>seatclamp_size</B></FONT>
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><B>shock_type</B></FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
   
   
@@ -657,14 +665,6 @@ digraph model_graph {
     <FONT COLOR="#7B7B7B" FACE="Roboto">recommended_fork_travel</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT COLOR="#7B7B7B" FACE="Roboto">DecimalField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">size</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DecimalField</FONT>
     </TD></TR>
   
   
@@ -728,7 +728,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>headtube</B></FONT>
+    <FONT FACE="Roboto"><B>headtube_type</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -785,6 +785,96 @@ digraph model_graph {
     </TABLE>
     >]
 
+  bikeparts_models_Shock [label=<
+    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+    Shock<BR/>&lt;<FONT FACE="Roboto"><I>BikePart</I></FONT>&gt;
+    </B></FONT></TD></TR>
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>id</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>AutoField</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><I><B>brand</B></I></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><I><B>ForeignKey (id)</B></I></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>color</B></I></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>ForeignKey (id)</B></I></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>group</B></I></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>ForeignKey (id)</B></I></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>material</B></I></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>ForeignKey (id)</B></I></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>shock_type</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><I>model</I></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><I>CharField</I></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><I>price</I></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><I>DecimalField</I></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">suspension_type</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">CharField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><I>weight</I></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><I>DecimalField</I></FONT>
+    </TD></TR>
+  
+  
+    </TABLE>
+    >]
+
   bikeparts_models_Crankset [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
@@ -802,7 +892,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>bottom_bracket_size</B></FONT>
+    <FONT FACE="Roboto"><B>bottom_bracket_type</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -998,6 +1088,14 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>front_derailleur_type</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>group</B></I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>ForeignKey (id)</B></I></FONT>
@@ -1009,14 +1107,6 @@ digraph model_graph {
     <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>material</B></I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>ForeignKey (id)</B></I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>mount_type</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
   
   
@@ -1096,7 +1186,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>mount_type</B></FONT>
+    <FONT FACE="Roboto"><B>rear_derailleur_type</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -1181,6 +1271,14 @@ digraph model_graph {
     <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>material</B></I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>ForeignKey (id)</B></I></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>pad_material</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
   
   
@@ -1384,6 +1482,14 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>brake_rotor_type</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><I><B>brand</B></I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><I><B>ForeignKey (id)</B></I></FONT>
@@ -1411,14 +1517,6 @@ digraph model_graph {
     <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>material</B></I></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>ForeignKey (id)</B></I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>size</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
   
   
@@ -1490,17 +1588,17 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>material</B></I></FONT>
+    <FONT FACE="Roboto"><B>handlebar_type</B></FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>ForeignKey (id)</B></I></FONT>
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
   
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>size</B></FONT>
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>material</B></I></FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><I><B>ForeignKey (id)</B></I></FONT>
     </TD></TR>
   
   
@@ -1580,15 +1678,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>handlebar_size</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>headtube</B></FONT>
+    <FONT FACE="Roboto"><B>handlebar_type</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -1784,7 +1874,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>size</B></FONT>
+    <FONT FACE="Roboto"><B>seatclamp_type</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -1898,7 +1988,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>size</B></FONT>
+    <FONT FACE="Roboto"><B>wheel_type</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
@@ -2107,7 +2197,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">h_type</FONT>
+    <FONT FACE="Roboto">headtube_type</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">CharField</FONT>
     </TD></TR>
@@ -2167,7 +2257,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">b_type</FONT>
+    <FONT FACE="Roboto">brake_type</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">CharField</FONT>
     </TD></TR>
@@ -2279,6 +2369,14 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">mount_type</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">CharField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">size</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">DecimalField</FONT>
@@ -2305,7 +2403,7 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">a_type</FONT>
+    <FONT FACE="Roboto">axle_type</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">CharField</FONT>
     </TD></TR>
@@ -2360,6 +2458,32 @@ digraph model_graph {
     <FONT FACE="Roboto">size</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">DecimalField</FONT>
+    </TD></TR>
+  
+  
+    </TABLE>
+    >]
+
+  bikeproperties_models_ShockType [label=<
+    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+    ShockType
+    </B></FONT></TD></TR>
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>id</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>AutoField</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">mount_length</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">CharField</FONT>
     </TD></TR>
   
   
@@ -2430,37 +2554,43 @@ digraph model_graph {
   [label=" color (%(class)ss)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Frame -> bikeproperties_models_HeadtubeType
-  [label=" headtube (frames)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" headtube_type (frames)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Frame -> bikeproperties_models_SeatclampType
-  [label=" seatclamp_size (frames)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" seatclamp_type (frames)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Frame -> bikeproperties_models_BottomBracketType
-  [label=" bottom_bracket_size (frames)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" bottom_bracket_type (frames)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  bikeparts_models_Frame -> bikeproperties_models_BrakeRotorType
-  [label=" max_brake_rotor_size (frames)"] [arrowhead=none, arrowtail=dot, dir=both];
+  bikeparts_models_Frame -> bikeproperties_models_AxleType
+  [label=" axle_type (frames)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  bikeparts_models_Frame -> bikeproperties_models_ShockType
+  [label=" shock_type (frames)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Frame -> bikeproperties_models_Application
   [label=" applications (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Frame -> bikeproperties_models_WheelType
-  [label=" wheel_sizes (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" wheel_types (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Frame -> bikeproperties_models_BrakeType
-  [label=" brake_type (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" brake_types (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Frame -> bikeproperties_models_RearDerailleurType
-  [label=" rear_derailleur_mount_type (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" rear_derailleur_types (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Frame -> bikeproperties_models_FrontDerailleurType
-  [label=" front_derailleur_mount_type (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" front_derailleur_types (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
+
+  bikeparts_models_Frame -> bikeproperties_models_BrakeRotorType
+  [label=" brake_rotor_type (frames)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Frame -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
   bikeparts_models_Fork -> bikeproperties_models_HeadtubeType
-  [label=" headtube (forks)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" headtube_type (forks)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Fork -> bikeproperties_models_AxleType
   [label=" axle_type (forks)"] [arrowhead=none, arrowtail=dot, dir=both];
@@ -2469,22 +2599,31 @@ digraph model_graph {
   [label=" applications (forks)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Fork -> bikeproperties_models_WheelType
-  [label=" wheel_sizes (forks)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" wheel_types (forks)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Fork -> bikeproperties_models_BrakeType
-  [label=" brake_type (forks)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" brake_types (forks)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Fork -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
+  bikeparts_models_Shock -> bikeproperties_models_ShockType
+  [label=" shock_type (shocks)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  bikeparts_models_Shock -> bikeproperties_models_Application
+  [label=" applications (shocks)"] [arrowhead=dot arrowtail=dot, dir=both];
+
+  bikeparts_models_Shock -> bikeparts_models_BikePart
+  [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
+
   bikeparts_models_Crankset -> bikeproperties_models_BottomBracketType
-  [label=" bottom_bracket_size (cranksets)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" bottom_bracket_type (cranksets)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Crankset -> bikeproperties_models_Application
   [label=" applications (cranksets)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Crankset -> bikeproperties_models_SpeedCompatibility
-  [label=" speed_compatibility (cranksets)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" speed_compatibilities (cranksets)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Crankset -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
@@ -2493,34 +2632,37 @@ digraph model_graph {
   [label=" applications (cassettes)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Cassette -> bikeproperties_models_SpeedCompatibility
-  [label=" speed_compatibility (cassettes)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" speed_compatibilities (cassettes)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Cassette -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
   bikeparts_models_FrontDerailleur -> bikeproperties_models_FrontDerailleurType
-  [label=" mount_type (front_derailleurs)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" front_derailleur_type (front_derailleurs)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_FrontDerailleur -> bikeproperties_models_Application
   [label=" applications (frontderailleurs)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_FrontDerailleur -> bikeproperties_models_SpeedCompatibility
-  [label=" speed_compatibility (front_derailleurs)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" speed_compatibilities (front_derailleurs)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_FrontDerailleur -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
   bikeparts_models_RearDerailleur -> bikeproperties_models_RearDerailleurType
-  [label=" mount_type (rear_derailleurs)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" rear_derailleur_type (rear_derailleurs)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_RearDerailleur -> bikeproperties_models_Application
   [label=" applications (rearderailleurs)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_RearDerailleur -> bikeproperties_models_SpeedCompatibility
-  [label=" speed_compatibility (rear_derailleurs)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" speed_compatibilities (rear_derailleurs)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_RearDerailleur -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
+
+  bikeparts_models_Brake -> bikeproperties_models_Material
+  [label=" pad_material (brake_pads)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Brake -> bikeproperties_models_BrakeType
   [label=" brake_type (brakes)"] [arrowhead=none, arrowtail=dot, dir=both];
@@ -2544,13 +2686,13 @@ digraph model_graph {
   [label=" applications (derailleurlevers)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_DerailleurLever -> bikeproperties_models_SpeedCompatibility
-  [label=" speed_compatibility (derailleur_levers)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" speed_compatibilities (derailleur_levers)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_DerailleurLever -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
   bikeparts_models_Rotor -> bikeproperties_models_BrakeRotorType
-  [label=" size (rotors)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" brake_rotor_type (rotors)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Rotor -> bikeproperties_models_Application
   [label=" applications (rotors)"] [arrowhead=dot arrowtail=dot, dir=both];
@@ -2559,7 +2701,7 @@ digraph model_graph {
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
   bikeparts_models_Handlebar -> bikeproperties_models_HandlebarType
-  [label=" size (handlebars)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" handlebar_type (handlebars)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Handlebar -> bikeproperties_models_Application
   [label=" applications (handlebars)"] [arrowhead=dot arrowtail=dot, dir=both];
@@ -2567,14 +2709,14 @@ digraph model_graph {
   bikeparts_models_Handlebar -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
-  bikeparts_models_Stem -> bikeproperties_models_HeadtubeType
-  [label=" headtube (stems)"] [arrowhead=none, arrowtail=dot, dir=both];
-
   bikeparts_models_Stem -> bikeproperties_models_HandlebarType
-  [label=" handlebar_size (stems)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" handlebar_type (stems)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Stem -> bikeproperties_models_Application
   [label=" applications (stems)"] [arrowhead=dot arrowtail=dot, dir=both];
+
+  bikeparts_models_Stem -> bikeproperties_models_HeadtubeType
+  [label=" headtube_types (stems)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   bikeparts_models_Stem -> bikeparts_models_BikePart
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
@@ -2586,7 +2728,7 @@ digraph model_graph {
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
   bikeparts_models_Seatpost -> bikeproperties_models_SeatclampType
-  [label=" size (seatposts)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" seatclamp_type (seatposts)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Seatpost -> bikeproperties_models_Application
   [label=" applications (seatposts)"] [arrowhead=dot arrowtail=dot, dir=both];
@@ -2595,7 +2737,7 @@ digraph model_graph {
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
   bikeparts_models_Wheels -> bikeproperties_models_WheelType
-  [label=" size (wheels)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" wheel_type (wheels)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   bikeparts_models_Wheels -> bikeproperties_models_BrakeType
   [label=" brake_type (wheels)"] [arrowhead=none, arrowtail=dot, dir=both];
