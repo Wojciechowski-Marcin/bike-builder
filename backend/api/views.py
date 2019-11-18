@@ -33,12 +33,12 @@ def builder_view(request):
             'rearderailleur': int(request.GET.get("rearderailleur", -1)),
             'brake': int(request.GET.get("brake", -1)),
             'brakelever': int(request.GET.get("brakelever", -1)),
-            'derailleurlevers': int(request.GET.get("derailleurlevers", -1)),
+            'derailleurlever': int(request.GET.get("derailleurlevers", -1)),
             'rotor': int(request.GET.get("rotor", -1)),
+            'stem': int(request.GET.get("stems", -1)),
             'handlebar': int(request.GET.get("handlebar", -1)),
-            'stems': int(request.GET.get("stems", -1)),
+            'seatpost': int(request.GET.get("seatposts", -1)),
             'saddle': int(request.GET.get("saddle", -1)),
-            'seatposts': int(request.GET.get("seatposts", -1)),
             'wheels': int(request.GET.get("wheels", -1)),
         }
         builder = Builder(budget, bike_type, bike_parts)
@@ -100,20 +100,20 @@ class bikepartsView(ObjectMultipleModelAPIView):
             'serializer_class': serializers.RotorSerializer
         },
         {
-            'queryset': bikeparts.models.Handlebar.objects.all(),
-            'serializer_class': serializers.HandlebarSerializer
-        },
-        {
             'queryset': bikeparts.models.Stem.objects.all(),
             'serializer_class': serializers.StemSerializer
         },
         {
-            'queryset': bikeparts.models.Saddle.objects.all(),
-            'serializer_class': serializers.SaddleSerializer
+            'queryset': bikeparts.models.Handlebar.objects.all(),
+            'serializer_class': serializers.HandlebarSerializer
         },
         {
             'queryset': bikeparts.models.Seatpost.objects.all(),
             'serializer_class': serializers.SeatpostSerializer
+        },
+        {
+            'queryset': bikeparts.models.Saddle.objects.all(),
+            'serializer_class': serializers.SaddleSerializer
         },
         {
             'queryset': bikeparts.models.Wheels.objects.all(),

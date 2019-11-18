@@ -9,7 +9,7 @@ services:
       - ./frontend:/app
 
   backend:
-    # restart: always
+    restart: always
     ports:
       - 8000:8000
     build: ./backend
