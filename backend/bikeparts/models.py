@@ -205,13 +205,19 @@ class Fork(BikePart):
 
 class Shock(BikePart):
 
+    SUSPENSION_TYPES = [
+        ('Oil', 'Oil'),
+        ('Air', 'Air')
+    ]
+
     shock_type = models.ForeignKey(
         'bikeproperties.ShockType',
         on_delete=models.PROTECT,
         related_name='shocks')
 
     suspension_type = models.CharField(
-        max_length=16)
+        max_length=16,
+        choices=SUSPENSION_TYPES)
 
 
 class Crankset(BikePart):
@@ -285,11 +291,6 @@ class RearDerailleur(BikePart):
 
 class Brake(BikePart):
 
-    pad_material = models.ForeignKey(
-        'bikeproperties.Material',
-        on_delete=models.PROTECT,
-        related_name='brake_pads')
-
     brake_type = models.ForeignKey(
         'bikeproperties.BrakeType',
         on_delete=models.PROTECT,
@@ -362,10 +363,6 @@ class Stem(BikePart):
 
 class Saddle(BikePart):
 
-    length = models.DecimalField(
-        max_digits=3,
-        decimal_places=0)
-
     width = models.DecimalField(
         max_digits=3,
         decimal_places=0)
@@ -384,7 +381,7 @@ class Seatpost(BikePart):
 
     travel = models.DecimalField(
         max_digits=3,
-        decimal_places=1,
+        decimal_places=0,
         null=True,
         blank=True)
 

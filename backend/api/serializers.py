@@ -312,7 +312,7 @@ class SaddleSerializer(BikePartSerializer):
     class Meta:
         model = bikeparts.models.Saddle
         fields = BikePartSerializer.Meta.fields + (
-            'length', 'width')
+            'width',)
 
 
 class SeatpostSerializer(BikePartSerializer):
