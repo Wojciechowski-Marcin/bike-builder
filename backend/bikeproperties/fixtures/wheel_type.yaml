@@ -1,21 +1,24 @@
-
 - model: bikeproperties.wheeltype
   pk: 1
   fields:
-    size: '29.0'
+      size: "29.0"
 - model: bikeproperties.wheeltype
   pk: 2
   fields:
-    size: '27.5'
+      size: "27.5"
 - model: bikeproperties.wheeltype
   pk: 3
   fields:
-    size: '26.0'
+      size: "26.0"
 - model: bikeproperties.wheeltype
   pk: 4
   fields:
-    size: '24.0'
+      size: "24.0"
 - model: bikeproperties.wheeltype
   pk: 5
   fields:
-    size: '20.0'
+      size: "20.0"
+- model: bikeproperties.wheeltype
+  pk: 6
+  fields:
+      size: "28.0"

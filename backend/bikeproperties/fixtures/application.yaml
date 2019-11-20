@@ -1,13 +1,16 @@
-
 - model: bikeproperties.application
   pk: 1
   fields:
-    name: Road
+      name: Road
 - model: bikeproperties.application
   pk: 2
   fields:
-    name: Trekking
+      name: Trekking
 - model: bikeproperties.application
   pk: 3
   fields:
-    name: MTB
+      name: MTB
+- model: bikeproperties.application
+  pk: 4
+  fields:
+      name: Dirt
