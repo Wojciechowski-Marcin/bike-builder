@@ -73,7 +73,7 @@ export class PartSelector extends React.Component<IProps> {
           {this.props.label}
         </Title>
         <Cascader
-          defaultValue={["0"]}
+          defaultValue={["-1"]}
           options={this.props.partSelectorData.options}
           onChange={this.onChange}
           style={style.cascader}

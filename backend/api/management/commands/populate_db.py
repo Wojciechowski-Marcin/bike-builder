@@ -233,8 +233,10 @@ class Command(BaseCommand):
                 suspension_type = 'Oil' if choices(
                     [0, 1], [0.5, 0.5])[0] else 'Air'
 
-                travel = choice([100, 110, 120, 130, 140,
-                                 150, 160, 170, 180, 190])
+                travel_choices = [100, 110, 120, 130,
+                                  140, 150, 160, 170, 180, 190]
+                travel_int = randint(2, len(travel_choices)-3)
+                travels = travel_choices[travel_int-2:travel_int+2]
 
                 headtube_type_count = HeadtubeType.objects.count()
                 headtube_type = HeadtubeType.objects.all()[
@@ -255,24 +257,26 @@ class Command(BaseCommand):
                 weight = randint(1500, 2000) * weight_multiplier
                 price = randint(120, 280) * price_multiplier
 
-                fork = Fork(
-                    brand=random_brand,
-                    group=random_group,
-                    model=model_name,
-                    material=random_material,
-                    weight=weight,
-                    color=random_color,
-                    price=price,
-                    suspension_type=suspension_type,
-                    travel=travel,
-                    headtube_type=headtube_type,
-                    axle_type=axle_type,
-                )
-                fork.save()
-                fork.applications.set(random_applications)
-                fork.wheel_types.set(wheel_types)
-                fork.brake_types.set(brake_types)
-                self.stdout.write(self.style.SUCCESS(f'Created {fork}'))
+                for travel in travels:
+                    new_model_name = model_name + '_' + str(travel)
+                    fork = Fork(
+                        brand=random_brand,
+                        group=random_group,
+                        model=new_model_name,
+                        material=random_material,
+                        weight=weight,
+                        color=random_color,
+                        price=price,
+                        suspension_type=suspension_type,
+                        travel=travel,
+                        headtube_type=headtube_type,
+                        axle_type=axle_type,
+                    )
+                    fork.save()
+                    fork.applications.set(random_applications)
+                    fork.wheel_types.set(wheel_types)
+                    fork.brake_types.set(brake_types)
+                    self.stdout.write(self.style.SUCCESS(f'Created {fork}'))
 
             elif obj.__name__ == 'Shock':
 
@@ -644,28 +648,35 @@ class Command(BaseCommand):
                     randint(0, wheel_type_count-1)]
 
                 brake_type_count = BrakeType.objects.count()
-                brake_type = BrakeType.objects.all()[
-                    randint(0, brake_type_count-1)]
+                brake_types = set([
+                    BrakeType.objects.all()[randint(0, brake_type_count-1)]
+                    for _ in range(2)])
 
                 axle_type_count = AxleType.objects.count()
-                axle_type = AxleType.objects.all()[
-                    randint(0, seatclamp_type_count-1)]
+                axle_types = set([
+                    AxleType.objects.all()[randint(0, seatclamp_type_count-1)]
+                    for _ in range(3)])
 
-                wheels = Wheels(
-                    brand=random_brand,
-                    group=random_group,
-                    model=model_name,
-                    material=random_material,
-                    weight=weight,
-                    color=random_color,
-                    price=price,
-                    wheel_type=wheel_type,
-                    brake_type=brake_type,
-                    axle_type=axle_type)
-                wheels.save()
-                wheels.applications.set(random_applications)
-                self.stdout.write(self.style.SUCCESS(
-                    f'Created {wheels}'))
+                for axle_type in axle_types:
+                    for brake_type in brake_types:
+                        new_model_name = model_name + '_' + \
+                            axle_type.axle_type + '_' + \
+                            brake_type.mount_type[0] + brake_type.brake_type[0]
+                        wheels = Wheels(
+                            brand=random_brand,
+                            group=random_group,
+                            model=new_model_name,
+                            material=random_material,
+                            weight=weight,
+                            color=random_color,
+                            price=price,
+                            wheel_type=wheel_type,
+                            brake_type=brake_type,
+                            axle_type=axle_type)
+                        wheels.save()
+                        wheels.applications.set(random_applications)
+                        self.stdout.write(self.style.SUCCESS(
+                            f'Created {wheels}'))
 
         self.stdout.write(self.style.SUCCESS(
             'Successfully created database models'))

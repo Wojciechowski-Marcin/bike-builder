@@ -1,3 +1,5 @@
+import time
+
 from django.http import JsonResponse
 from bikeparts.models import *
 from bikeproperties.models import *
@@ -5,7 +7,7 @@ from bikeproperties.models import *
 from .bike_build import BikeBuild, build_parts
 
 
-population_size = 100
+population_size = 25
 
 
 class Builder:
@@ -20,21 +22,30 @@ class Builder:
             else None
             for index in range(len(build_parts))]
 
-        self.bike_build = BikeBuild(self.bike_parts)
-
-        self.population = self.starting_population()
-
-    def generate_random_build(self):
-        self.bike_build.build()
+        self.population = []
 
     def starting_population(self):
-        return [self.generate_random_build() for _ in range(population_size)]
+        population = []
+        timeout = time.time() + 15
+        while len(population) < population_size:
+            bike_build = BikeBuild(self.bike_parts)
+            build = bike_build.build()
+            if(build):
+                population.append(bike_build)
+            if time.time() > timeout:
+                break
+        return population
 
     def make_build(self):
-        pass
+        self.population = self.starting_population()
+        self.population.sort(key=lambda x: x.score(
+            self.budget, self.bike_type))
+        for p in self.population:
+            print(p.score(self.budget, self.bike_type))
+        return self.population[0].result
 
     def make_response(self):
+        build = self.make_build()
         return JsonResponse({
-            bike_part.class_name.lower(): bike_part.id
-            for bike_part in self.bike_parts if bike_part},
-            safe=False)
+            bike_part.class_name.lower(): bike_part.id for bike_part in build},
+            safe=False) if build else JsonResponse({'error': "couldnt build"})

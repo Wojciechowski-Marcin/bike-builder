@@ -26,6 +26,7 @@ class BikeBuild:
 
     def __init__(self, bike_parts):
         self.bike_parts = bike_parts
+        self.result = []
 
     def get_random_part(self, part_queryset):
         count = part_queryset.count()
@@ -103,6 +104,32 @@ class BikeBuild:
             fork_matching_wheels)
         return self.get_random_part(matching_wheels)
 
+    def price(self):
+        price = 0
+        for part in self.result:
+            price += part.price
+        return price
+
+    def weight(self):
+        weight = 0
+        for part in self.result:
+            weight += part.weight
+        return weight
+
+    def score(self, budget, application):
+        score = 0
+        price = 0
+        for part in self.result:
+            score += part.weight
+            price += part.price
+
+        if price > budget:
+            score += 5000
+        else:
+            score -= (budget-price)
+
+        return score
+
     def build(self):
         result = []
 
@@ -170,5 +197,11 @@ class BikeBuild:
         wheels = self.bike_parts[14] or \
             self.get_random_matching_wheels(frame, fork)
         result.append(wheels)
+
+        for r in result:
+            if not r:
+                return None
+
+        self.result = result
 
         return result

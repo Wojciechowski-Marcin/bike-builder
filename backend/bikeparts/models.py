@@ -160,7 +160,8 @@ class Frame(BikePart):
             front_derailleur_type__in=self.front_derailleur_types.all())
 
     def find_matching_rotors(self):
-        return Rotor.objects.filter(brake_rotor_type=self.brake_rotor_type)
+        return Rotor.objects.filter(
+            brake_rotor_type__in=self.brake_rotor_type.all())
 
     def find_matching_shocks(self):
         return Shock.objects.filter(shock_type=self.shock_type)
@@ -201,6 +202,12 @@ class Fork(BikePart):
 
     def find_matching_brakes(self):
         return Brake.objects.filter(brake_type__in=self.brake_types.all())
+
+    def find_matching_wheels(self):
+        return Wheels.objects.filter(
+            wheel_type__in=self.wheel_types.all()).filter(
+                axle_type=self.axle_type).filter(
+                    brake_type__in=self.brake_types.all())
 
 
 class Shock(BikePart):
@@ -358,7 +365,7 @@ class Stem(BikePart):
         related_name='stems')
 
     def find_matching_handlebars(self):
-        return Handlebar.objects.filter(handebar_type=self.handlebar_type)
+        return Handlebar.objects.filter(handlebar_type=self.handlebar_type)
 
 
 class Saddle(BikePart):

@@ -48,7 +48,7 @@ function getBikepartCascaderOptions(
 ) {
   let returnArray: CascaderOptionType[] = [
     {
-      value: "0",
+      value: "-1",
       label: PartNotSelectedText,
     },
   ];
@@ -67,5 +67,5 @@ function getBikepartCascaderOptions(
 
   return returnArray.length > 1
     ? returnArray
-    : [{ value: "0", label: NoAvailablePartsText }];
+    : [{ value: "-1", label: NoAvailablePartsText }];
 }

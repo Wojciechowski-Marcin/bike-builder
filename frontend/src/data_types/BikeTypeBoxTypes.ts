@@ -1,6 +1,6 @@
 export const BikeTypeBoxTypes = {
   MTB: "MTB",
-  CITY: "City",
+  DIRT: "Dirt",
   ROAD: "Road",
-  TREKKING: "Trekking"
+  TREKKING: "Trekking",
 };
