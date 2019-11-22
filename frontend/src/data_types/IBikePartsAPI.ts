@@ -9,7 +9,6 @@ import { IFrontDerailleur } from "./bike_parts/IFrontDerailleur";
 import { IHandlebar } from "./bike_parts/IHandlebar";
 import { IRearDerailleur } from "./bike_parts/IRearDerailleur";
 import { IRotor } from "./bike_parts/IRotor";
-import { ISaddle } from "./bike_parts/ISaddle";
 import { ISeatpost } from "./bike_parts/ISeatpost";
 import { IShock } from "./bike_parts/IShock";
 import { IStem } from "./bike_parts/IStem";
@@ -29,7 +28,6 @@ export interface IBikePartsAPI {
   Rotor: IRotor[];
   Handlebar: IHandlebar[];
   Stem: IStem[];
-  Saddle: ISaddle[];
   Seatpost: ISeatpost[];
   Wheels: IWheels[];
 }
@@ -48,6 +46,5 @@ export type IBikePartType =
   | IRotor
   | IHandlebar
   | IStem
-  | ISaddle
   | ISeatpost
   | IWheels;

@@ -11,6 +11,7 @@ import {
 const { Title } = Typography;
 
 interface IProps {
+  refreshPartSelector: boolean;
   actionKey: string;
   currentPrice: number;
   label: string;
@@ -18,20 +19,40 @@ interface IProps {
   changeBikeBuild: (bikeBuild: IBikeBuild) => void;
 }
 
-export class PartSelector extends React.Component<IProps> {
+interface IState {
+  value: string[];
+}
+
+export class PartSelector extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
+    this.state = { value: ["-1"] };
     this.onChange = this.onChange.bind(this);
     this.getPartPriceById = this.getPartPriceById.bind(this);
   }
 
+  componentWillReceiveProps(oldProps: IProps) {
+    if (oldProps.refreshPartSelector !== this.props.refreshPartSelector) {
+      this.setState({
+        ...this.state,
+        value: ["-1"],
+      });
+    }
+  }
+
   getPartPriceById(id: number) {
-    return this.props.partSelectorData.availableParts.find(
-      part => part.id === id,
-    )!.price;
+    return (
+      id !== -1 &&
+      this.props.partSelectorData.availableParts.find(part => part.id === id)!
+        .price
+    );
   }
 
   onChange(value: string[]) {
+    this.setState({
+      ...this.state,
+      value,
+    });
     const currentSelectedPartId = parseInt(value[0]);
     const currentSelectedPartPrice =
       currentSelectedPartId && this.getPartPriceById(currentSelectedPartId);
@@ -73,7 +94,7 @@ export class PartSelector extends React.Component<IProps> {
           {this.props.label}
         </Title>
         <Cascader
-          defaultValue={["-1"]}
+          value={this.state.value}
           options={this.props.partSelectorData.options}
           onChange={this.onChange}
           style={style.cascader}

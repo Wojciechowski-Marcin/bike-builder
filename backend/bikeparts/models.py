@@ -109,7 +109,7 @@ class Frame(BikePart):
         on_delete=models.PROTECT,
         related_name='frames')
 
-    brake_rotor_type = models.ManyToManyField(
+    brake_rotor_types = models.ManyToManyField(
         'bikeproperties.BrakeRotorType',
         related_name='frames')
 
@@ -126,45 +126,57 @@ class Frame(BikePart):
         null=True,
         blank=True)
 
-    def find_matching_wheels(self):
-        return Wheels.objects.filter(
-            wheel_type__in=self.wheel_types.all()).filter(
-                axle_type=self.axle_type).filter(
-                    brake_type__in=self.brake_types.all())
-
     def find_matching_forks(self):
-        return (Fork.objects.filter(
+        qs = Fork.objects.filter(
             headtube_type=self.headtube_type).filter(
                 wheel_types__in=self.wheel_types.all()).filter(
-                    axle_type=self.axle_type))
+                    axle_type=self.axle_type)
+        if self.recommended_fork_travel:
+            qs.filter(travel=self.recommended_fork_travel)
+        return qs
 
-    def find_matching_stems(self):
-        return Stem.objects.filter(headtube_types=self.headtube_type)
-
-    def find_matching_seatposts(self):
-        return Seatpost.objects.filter(seatclamp_type=self.seatclamp_type)
+    def find_matching_shocks(self):
+        return Shock.objects.filter(
+            shock_type=self.shock_type) \
+            if self.shock_type else []
 
     def find_matching_cranksets(self):
         return Crankset.objects.filter(
             bottom_bracket_type=self.bottom_bracket_type)
 
-    def find_matching_brakes(self):
-        return Brake.objects.filter(brake_type__in=self.brake_types.all())
-
-    def find_matching_rear_derailleurs(self):
-        return RearDerailleur.objects.filter(
-            rear_derailleur_type__in=self.rear_derailleur_types.all())
-
-    def find_matching_front_derailleurs(self):
+    def find_matching_frontderailleurs(self):
         return FrontDerailleur.objects.filter(
             front_derailleur_type__in=self.front_derailleur_types.all())
 
+    def find_matching_rearderailleurs(self):
+        return RearDerailleur.objects.filter(
+            rear_derailleur_type__in=self.rear_derailleur_types.all())
+
+    def find_matching_brakes(self):
+        return Brake.objects.filter(
+            brake_type__in=self.brake_types.all())
+
+    def find_matching_brakelevers(self):
+        return BrakeLever.objects.filter(
+            brake_type__in=self.brake_types.all())
+
     def find_matching_rotors(self):
         return Rotor.objects.filter(
-            brake_rotor_type__in=self.brake_rotor_type.all())
+            brake_rotor_type__in=self.brake_rotor_types.all())
 
-    def find_matching_shocks(self):
-        return Shock.objects.filter(shock_type=self.shock_type)
+    def find_matching_stems(self):
+        return Stem.objects.filter(
+            headtube_types=self.headtube_type)
+
+    def find_matching_seatposts(self):
+        return Seatpost.objects.filter(
+            seatclamp_type=self.seatclamp_type)
+
+    def find_matching_wheels(self):
+        return Wheels.objects.filter(
+            wheel_type__in=self.wheel_types.all()).filter(
+                axle_type=self.axle_type).filter(
+                    brake_type__in=self.brake_types.all())
 
 
 class Fork(BikePart):
@@ -200,31 +212,29 @@ class Fork(BikePart):
         bikeproperties.models.BrakeType,
         related_name='forks')
 
+    def find_matching_frames(self):
+        return Frame.objects.filter(
+            headtube_type=self.headtube_type).filter(
+                wheel_types__in=self.wheel_types.all()).filter(
+                    axle_type=self.axle_type)
+
     def find_matching_brakes(self):
-        return Brake.objects.filter(brake_type__in=self.brake_types.all())
+        return Brake.objects.filter(
+            brake_type__in=self.brake_types.all())
+
+    def find_matching_brakelevers(self):
+        return BrakeLever.objects.filter(
+            brake_type__in=self.brake_types.all())
+
+    def find_matching_stems(self):
+        return Stem.objects.filter(
+            headtube_types=self.headtube_type)
 
     def find_matching_wheels(self):
         return Wheels.objects.filter(
             wheel_type__in=self.wheel_types.all()).filter(
                 axle_type=self.axle_type).filter(
                     brake_type__in=self.brake_types.all())
-
-
-class Shock(BikePart):
-
-    SUSPENSION_TYPES = [
-        ('Oil', 'Oil'),
-        ('Air', 'Air')
-    ]
-
-    shock_type = models.ForeignKey(
-        'bikeproperties.ShockType',
-        on_delete=models.PROTECT,
-        related_name='shocks')
-
-    suspension_type = models.CharField(
-        max_length=16,
-        choices=SUSPENSION_TYPES)
 
 
 class Crankset(BikePart):
@@ -245,19 +255,23 @@ class Crankset(BikePart):
         max_digits=3,
         decimal_places=0)
 
+    def find_matching_frames(self):
+        return Frame.objects.filter(
+            bottom_bracket_type=self.bottom_bracket_type)
+
     def find_matching_cassettes(self):
         return Cassette.objects.filter(
             speed_compatibilities__in=self.speed_compatibilities.all())
 
-    def find_matching_front_derailleurs(self):
+    def find_matching_frontderailleurs(self):
         return FrontDerailleur.objects.filter(
             speed_compatibilities__in=self.speed_compatibilities.all())
 
-    def find_matching_rear_derailleurs(self):
+    def find_matching_rearderailleurs(self):
         return RearDerailleur.objects.filter(
             speed_compatibilities__in=self.speed_compatibilities.all())
 
-    def find_matching_derailleur_levers(self):
+    def find_matching_derailleurlevers(self):
         return DerailleurLever.objects.filter(
             speed_compatibilities__in=self.speed_compatibilities.all())
 
@@ -271,6 +285,22 @@ class Cassette(BikePart):
         bikeproperties.models.SpeedCompatibility,
         related_name='cassettes')
 
+    def find_matching_cranksets(self):
+        return Crankset.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
+    def find_matching_frontderailleurs(self):
+        return FrontDerailleur.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
+    def find_matching_rearderailleurs(self):
+        return RearDerailleur.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
+    def find_matching_derailleurlevers(self):
+        return DerailleurLever.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
 
 class FrontDerailleur(BikePart):
 
@@ -282,6 +312,26 @@ class FrontDerailleur(BikePart):
         'bikeproperties.FrontDerailleurType',
         on_delete=models.PROTECT,
         related_name='front_derailleurs')
+
+    def find_matching_frames(self):
+        return Frame.objects.filter(
+            front_derailleur_types=self.front_derailleur_type)
+
+    def find_matching_cassettes(self):
+        return Cassette.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
+    def find_matching_cranksets(self):
+        return Crankset.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
+    def find_matching_rearderailleurs(self):
+        return RearDerailleur.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
+    def find_matching_derailleurlevers(self):
+        return DerailleurLever.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
 
 
 class RearDerailleur(BikePart):
@@ -295,6 +345,26 @@ class RearDerailleur(BikePart):
         on_delete=models.PROTECT,
         related_name='rear_derailleurs')
 
+    def find_matching_frames(self):
+        return Frame.objects.filter(
+            rear_derailleur_types=self.rear_derailleur_type)
+
+    def find_matching_cassettes(self):
+        return Cassette.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
+    def find_matching_cranksets(self):
+        return Crankset.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
+    def find_matching_frontderailleurs(self):
+        return FrontDerailleur.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
+    def find_matching_derailleurlevers(self):
+        return DerailleurLever.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
 
 class Brake(BikePart):
 
@@ -303,11 +373,21 @@ class Brake(BikePart):
         on_delete=models.PROTECT,
         related_name='brakes')
 
-    def find_matching_brake_levers(self):
-        return BrakeLever.objects.filter(brake_type=self.brake_type)
+    def find_matching_frames(self):
+        return Frame.objects.filter(
+            brake_types=self.brake_type)
+
+    def find_matching_forks(self):
+        return Fork.objects.filter(
+            brake_types=self.brake_type)
+
+    def find_matching_brakelevers(self):
+        return BrakeLever.objects.filter(
+            brake_type=self.brake_type)
 
     def find_matching_wheels(self):
-        return Wheels.objects.filter(brake_type=self.brake_type)
+        return Wheels.objects.filter(
+            brake_type=self.brake_type)
 
 
 class BrakeLever(BikePart):
@@ -317,12 +397,44 @@ class BrakeLever(BikePart):
         on_delete=models.PROTECT,
         related_name='brake_levers')
 
+    def find_matching_frames(self):
+        return Frame.objects.filter(
+            brake_types=self.brake_type)
+
+    def find_matching_forks(self):
+        return Fork.objects.filter(
+            brake_types=self.brake_type)
+
+    def find_matching_brakes(self):
+        return Brake.objects.filter(
+            brake_type=self.brake_type)
+
+    def find_matching_wheels(self):
+        return Wheels.objects.filter(
+            brake_type=self.brake_type)
+
 
 class DerailleurLever(BikePart):
 
     speed_compatibilities = models.ManyToManyField(
         bikeproperties.models.SpeedCompatibility,
         related_name='derailleur_levers')
+
+    def find_matching_cassettes(self):
+        return Cassette.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
+    def find_matching_cranksets(self):
+        return Crankset.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
+    def find_matching_frontderailleurs(self):
+        return FrontDerailleur.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
+
+    def find_matching_rearderailleurs(self):
+        return RearDerailleur.objects.filter(
+            speed_compatibilities__in=self.speed_compatibilities.all())
 
 
 class Rotor(BikePart):
@@ -332,17 +444,13 @@ class Rotor(BikePart):
         on_delete=models.PROTECT,
         related_name='rotors')
 
+    def find_matching_frames(self):
+        return Frame.objects.filter(
+            brake_rotor_types=self.brake_rotor_type)
 
-class Handlebar(BikePart):
-
-    width = models.DecimalField(
-        max_digits=3,
-        decimal_places=0)
-
-    handlebar_type = models.ForeignKey(
-        'bikeproperties.HandlebarType',
-        on_delete=models.PROTECT,
-        related_name='handlebars')
+    def find_matching_wheels(self):
+        return Wheels.objects.filter(
+            brake_rotor_types=self.brake_rotor_type)
 
 
 class Stem(BikePart):
@@ -364,15 +472,33 @@ class Stem(BikePart):
         on_delete=models.PROTECT,
         related_name='stems')
 
+    def find_matching_frames(self):
+        return Frame.objects.filter(
+            headtube_type__in=self.headtube_types.all())
+
+    def find_matching_forks(self):
+        return Fork.objects.filter(
+            headtube_type__in=self.headtube_types.all())
+
     def find_matching_handlebars(self):
-        return Handlebar.objects.filter(handlebar_type=self.handlebar_type)
+        return Handlebar.objects.filter(
+            handlebar_type=self.handlebar_type)
 
 
-class Saddle(BikePart):
+class Handlebar(BikePart):
 
     width = models.DecimalField(
         max_digits=3,
         decimal_places=0)
+
+    handlebar_type = models.ForeignKey(
+        'bikeproperties.HandlebarType',
+        on_delete=models.PROTECT,
+        related_name='handlebars')
+
+    def find_matching_stems(self):
+        return Stem.objects.filter(
+            handlebar_type=self.handlebar_type)
 
 
 class Seatpost(BikePart):
@@ -392,6 +518,10 @@ class Seatpost(BikePart):
         null=True,
         blank=True)
 
+    def find_matching_frames(self):
+        return Frame.objects.filter(
+            seatclamp_type=self.seatclamp_type)
+
 
 class Wheels(BikePart):
 
@@ -410,5 +540,54 @@ class Wheels(BikePart):
         on_delete=models.PROTECT,
         related_name='wheels')
 
+    brake_rotor_types = models.ManyToManyField(
+        'bikeproperties.BrakeRotorType',
+        related_name='wheels')
+
+    def find_matching_frames(self):
+        return Frame.objects.filter(
+            wheel_types=self.wheel_type).filter(
+                axle_type=self.axle_type).filter(
+                    brake_types=self.brake_type)
+
+    def find_matching_forks(self):
+        return Fork.objects.filter(
+            wheel_types=self.wheel_type).filter(
+                axle_type=self.axle_type).filter(
+                    brake_types=self.brake_type)
+
+    def find_matching_rotors(self):
+        return Rotor.objects.filter(
+            brake_rotor_type__in=self.brake_rotor_types.all())
+
+    def find_matching_brakes(self):
+        return Brake.objects.filter(
+            brake_type=self.brake_type)
+
+    def find_matching_brakelevers(self):
+        return BrakeLever.objects.filter(
+            brake_type=self.brake_type)
+
     class Meta:
         verbose_name_plural = 'Wheels'
+
+
+class Shock(BikePart):
+
+    SUSPENSION_TYPES = [
+        ('Oil', 'Oil'),
+        ('Air', 'Air')
+    ]
+
+    shock_type = models.ForeignKey(
+        'bikeproperties.ShockType',
+        on_delete=models.PROTECT,
+        related_name='shocks')
+
+    suspension_type = models.CharField(
+        max_length=16,
+        choices=SUSPENSION_TYPES)
+
+    def find_matching_frames(self):
+        return Frame.objects.filter(
+            shock_type=self.shock_type)

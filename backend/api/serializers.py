@@ -155,7 +155,7 @@ class FrameSerializer(BikePartSerializer):
     brake_types = BrakeTypeSerializer(many=True)
     rear_derailleur_types = RearDerailleurTypeSerializer(many=True)
     front_derailleur_types = FrontDerailleurTypeSerializer(many=True)
-    brake_rotor_type = BrakeRotorTypeSerializer(many=True)
+    brake_rotor_types = BrakeRotorTypeSerializer(many=True)
 
     class Meta:
         model = bikeparts.models.Frame
@@ -167,7 +167,7 @@ class FrameSerializer(BikePartSerializer):
             'brake_types',
             'rear_derailleur_types',
             'front_derailleur_types',
-            'brake_rotor_type',
+            'brake_rotor_types',
             'recommended_fork_travel',)
 
 
@@ -305,14 +305,6 @@ class StemSerializer(BikePartSerializer):
         model = bikeparts.models.Stem
         fields = BikePartSerializer.Meta.fields + (
             'length', 'angle', 'headtube_types', 'handlebar_type',)
-
-
-class SaddleSerializer(BikePartSerializer):
-
-    class Meta:
-        model = bikeparts.models.Saddle
-        fields = BikePartSerializer.Meta.fields + (
-            'width',)
 
 
 class SeatpostSerializer(BikePartSerializer):

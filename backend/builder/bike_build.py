@@ -1,11 +1,12 @@
-from random import randint
+from random import randint, shuffle
 
 from bikeparts.models import *
+from .model_dependences import model_dependences
+from . import utils
 
 
 build_parts = [
     Frame,
-    Fork,
     Crankset,
     Cassette,
     FrontDerailleur,
@@ -17,191 +18,98 @@ build_parts = [
     Stem,
     Handlebar,
     Seatpost,
-    Saddle,
     Wheels
 ]
 
 
 class BikeBuild:
 
-    def __init__(self, bike_parts):
+    def __init__(self, budget, bike_type, bike_parts):
+        self.budget = budget
+        self.bike_type = bike_type
         self.bike_parts = bike_parts
-        self.result = []
+        self.build_parts = build_parts
+        if bike_type == 'MTB' or bike_type == 'Dirt':
+            self.build_parts.append(Shock)
+            self.build_parts.append(Fork)
+        self.build = None
+        self.fill_build_with_initial_params()
 
-    def get_random_part(self, part_queryset):
-        count = part_queryset.count()
-        return part_queryset[randint(0, count-1)] if count else None
-
-    def get_random_frame(self):
-        frames = Frame.objects.all()
-        return self.get_random_part(frames)
-
-    def get_random_matching_fork(self, frame):
-        matching_forks = frame.find_matching_forks()
-        return self.get_random_part(matching_forks)
-
-    def get_random_matching_crankset(self, frame):
-        matching_cranksets = frame.find_matching_cranksets()
-        return self.get_random_part(matching_cranksets)
-
-    def get_random_matching_cassette(self, frame, crankset):
-        matching_cassettes = crankset.find_matching_cassettes()
-        return self.get_random_part(matching_cassettes)
-
-    def get_random_matching_front_derailleur(self, frame, crankset):
-        frame_matching_front_derailleurs = frame.find_matching_front_derailleurs()
-        crankset_matching_front_derailleurs = crankset.find_matching_front_derailleurs()
-        matching_front_derailleurs = frame_matching_front_derailleurs.intersection(
-            crankset_matching_front_derailleurs)
-        return self.get_random_part(matching_front_derailleurs)
-
-    def get_random_matching_rear_derailleur(self, frame, crankset):
-        frame_matching_rear_derailleurs = frame.find_matching_rear_derailleurs()
-        crankset_matching_rear_derailleurs = crankset.find_matching_rear_derailleurs()
-        matching_rear_derailleurs = frame_matching_rear_derailleurs.intersection(
-            crankset_matching_rear_derailleurs)
-        return self.get_random_part(matching_rear_derailleurs)
-
-    def get_random_matching_brake(self, frame, fork):
-        frame_matching_brakes = frame.find_matching_brakes()
-        fork_matching_brakes = fork.find_matching_brakes()
-        matching_brakes = frame_matching_brakes.intersection(
-            fork_matching_brakes)
-        return self.get_random_part(matching_brakes)
-
-    def get_random_matching_brake_levers(self, brake):
-        matching_brake_levers = brake.find_matching_brake_levers()
-        return self.get_random_part(matching_brake_levers)
-
-    def get_random_matching_derailleur_levers(self, crankset):
-        matching_derailleur_levers = crankset.find_matching_derailleur_levers()
-        return self.get_random_part(matching_derailleur_levers)
-
-    def get_random_matching_rotor(self, frame):
-        matching_rotors = frame.find_matching_rotors()
-        return self.get_random_part(matching_rotors)
-
-    def get_random_matching_stem(self, frame):
-        matching_stems = frame.find_matching_stems()
-        return self.get_random_part(matching_stems)
-
-    def get_random_matching_handlebar(self, stem):
-        matching_handlebars = stem.find_matching_handlebars()
-        return self.get_random_part(matching_handlebars)
-
-    def get_random_matching_seatpost(self, frame):
-        matching_seatposts = frame.find_matching_seatposts()
-        return self.get_random_part(matching_seatposts)
-
-    def get_random_matching_saddle(self):
-        saddles = Saddle.objects.all()
-        return self.get_random_part(saddles)
-
-    def get_random_matching_wheels(self, frame, fork):
-        frame_matching_wheels = frame.find_matching_wheels()
-        fork_matching_wheels = fork.find_matching_wheels()
-        matching_wheels = frame_matching_wheels.intersection(
-            fork_matching_wheels)
-        return self.get_random_part(matching_wheels)
-
+    @property
     def price(self):
-        price = 0
-        for part in self.result:
-            price += part.price
-        return price
+        return sum([part.price for part in self.build])
 
+    @property
     def weight(self):
-        weight = 0
-        for part in self.result:
-            weight += part.weight
-        return weight
+        return sum([part.weight for part in self.build])
 
-    def score(self, budget, application):
-        score = 0
-        price = 0
-        for part in self.result:
-            score += part.weight
-            price += part.price
+    @property
+    def response(self):
+        return {name: part.id for name, part in self.build.items()}
 
-        if price > budget:
-            score += 5000
-        else:
-            score -= (budget-price)
+    @property
+    def score(self):
+        score = self.weight
+        price = self.price
+
+        score = score+5000 if price > self.budget \
+            else score-(self.budget-price)
 
         return score
 
-    def build(self):
-        result = []
+    def get_matching_parts(self, part_class):
+        querysets = []
+        part_class_name = part_class.__name__.lower()
+        dependency_keys = model_dependences[part_class_name]
 
-        frame = self.bike_parts[0] or self.get_random_frame()
-        result.append(frame)
-        if not frame:
-            return None
+        if len(self.build) == 0 or \
+                not utils.is_any_key_in_dict(dependency_keys, self.build):
+            return part_class.objects.all()
 
-        fork = self.bike_parts[1] or self.get_random_matching_fork(frame)
-        result.append(fork)
-        if not fork:
-            return None
+        shuffle(dependency_keys)
+        for key in dependency_keys:
+            dependent_part = self.build.get(key)
+            if dependent_part:
+                plural_class_name = 'wheels' if part_class_name == 'wheels' \
+                    else part_class_name + 's'
+                function_name = f'find_matching_{plural_class_name}'
 
-        crankset = self.bike_parts[2] or \
-            self.get_random_matching_crankset(frame)
-        result.append(crankset)
-        if not crankset:
-            return None
+                get_matching_parts_function = getattr(
+                    dependent_part, function_name)
 
-        cassette = self.bike_parts[3] or \
-            self.get_random_matching_cassette(frame, crankset)
-        result.append(cassette)
+                queryset = get_matching_parts_function()
+                filtered_queryset = queryset.filter(
+                    applications__name=self.bike_type)
 
-        frontDerailleur = self.bike_parts[4] or \
-            self.get_random_matching_front_derailleur(frame, crankset)
-        result.append(frontDerailleur)
+                querysets.append(queryset)
 
-        rearDerailleur = self.bike_parts[5] or \
-            self.get_random_matching_rear_derailleur(frame, crankset)
-        result.append(rearDerailleur)
+        return utils.querysets_intersection(querysets)
 
-        brake = self.bike_parts[6] or \
-            self.get_random_matching_brake(frame, fork)
-        result.append(brake)
-        if not brake:
-            return None
+    def fill_build_with_initial_params(self):
+        self.build = self.bike_parts
 
-        brakeLever = self.bike_parts[7] or \
-            self.get_random_matching_brake_levers(brake)
-        result.append(brakeLever)
+    def validate_build(self):
+        for key, value in self.build.items():
+            if not value:
+                print(key)
+                return False
+        return True
 
-        derailleurLever = self.bike_parts[8] or \
-            self.get_random_matching_derailleur_levers(crankset)
-        result.append(derailleurLever)
+    def initial_build(self):
+        self.fill_build_with_initial_params()
 
-        rotor = self.bike_parts[9] or self.get_random_matching_rotor(frame)
-        result.append(rotor)
+        shuffle(self.build_parts)
+        for build_part in self.build_parts:
+            build_part_name = build_part.__name__.lower()
+            part = self.build.get(build_part_name)
+            if not part:
+                matching_parts = self.get_matching_parts(build_part)
+                found_part = None
+                if matching_parts:
+                    found_part = utils.get_random_object(matching_parts)
+                self.build[build_part_name] = found_part
 
-        stem = self.bike_parts[10] or self.get_random_matching_stem(frame)
-        result.append(stem)
-        if not stem:
-            return None
+        if not self.validate_build():
+            self.build = None
 
-        handlebar = self.bike_parts[11] or \
-            self.get_random_matching_handlebar(stem)
-        result.append(handlebar)
-
-        seatpost = self.bike_parts[12] or \
-            self.get_random_matching_seatpost(frame)
-        result.append(seatpost)
-
-        saddle = self.bike_parts[13] or self.get_random_matching_saddle()
-        result.append(saddle)
-
-        wheels = self.bike_parts[14] or \
-            self.get_random_matching_wheels(frame, fork)
-        result.append(wheels)
-
-        for r in result:
-            if not r:
-                return None
-
-        self.result = result
-
-        return result
+        return self.build

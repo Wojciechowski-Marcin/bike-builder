@@ -8,6 +8,7 @@ import { PartSelector } from "./PartSelector";
 const { Title } = Typography;
 
 interface IProps {
+  refreshPartSelector: boolean;
   bikeBuild: IBikeBuild;
   bikePartSelectorData: IBikePartSelectorData;
   totalPrice: number;
@@ -26,6 +27,7 @@ export class BikePartSelector extends React.Component<IProps> {
           ([label, partSelectorData]) => {
             return (
               <PartSelector
+                refreshPartSelector={this.props.refreshPartSelector}
                 key={`partSelector-${label}`}
                 actionKey={label}
                 changeBikeBuild={this.props.changeBikeBuild}

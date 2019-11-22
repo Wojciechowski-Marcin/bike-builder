@@ -1,9 +1,12 @@
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
-import { Typography } from "antd";
+import { Typography, Spin } from "antd";
 import React from "react";
 
-import { changeBikeBuild } from "../../actions/userInputActions";
+import {
+  changeBikeBuild,
+  resetBikeBuild,
+} from "../../actions/userInputActions";
 import {
   getFetchBikePartsResult,
   getFetchBikePartsError,
@@ -34,16 +37,21 @@ interface IProps {
   fetchBikePartsPending: boolean;
   changeBikeBuild: (bikeBuild: IBikeBuild) => void;
   fetchBikeParts: () => void;
+  resetBikeBuild: () => void;
 }
 
 interface IState {
-  isVisible: boolean;
+  isInputData: boolean;
+  refreshPartSelector: boolean;
 }
 
 class BikePartSelectorContainer_ extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
-    this.state = { isVisible: this.shouldComponentBeVisible() };
+    this.state = {
+      isInputData: this.shouldComponentBeVisible(),
+      refreshPartSelector: false,
+    };
     this.calculateTotalPrice = this.calculateTotalPrice.bind(this);
   }
 
@@ -63,7 +71,12 @@ class BikePartSelectorContainer_ extends React.Component<IProps, IState> {
     if (doPropsDiffer) {
       this.setState({
         ...this.state,
-        isVisible: this.shouldComponentBeVisible(),
+        isInputData: this.shouldComponentBeVisible(),
+      });
+      this.props.resetBikeBuild();
+      this.setState({
+        ...this.state,
+        refreshPartSelector: !this.state.refreshPartSelector,
       });
     }
     if (this.props.fetchBikePartsError) {
@@ -90,14 +103,17 @@ class BikePartSelectorContainer_ extends React.Component<IProps, IState> {
       +this.props.budget - this.calculateTotalPrice(),
       this.props.bikeBuild,
     );
-    return !this.state.isVisible ? (
+    return !this.state.isInputData ? (
       <Title>Please input data above.</Title>
+    ) : this.props.fetchBikePartsPending ? (
+      <Spin tip="Loading.." size="large" />
     ) : (
       <div
         className="bikePartSelectorContainer"
         style={style.bikePartSelectorContainer}
       >
         <BikePartSelector
+          refreshPartSelector={this.state.refreshPartSelector}
           bikePartSelectorData={bikePartSelectorData}
           changeBikeBuild={this.props.changeBikeBuild}
           bikeBuild={this.props.bikeBuild}
@@ -125,7 +141,10 @@ const mapStateToProps = (state: IRootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators({ changeBikeBuild, fetchBikeParts }, dispatch);
+  bindActionCreators(
+    { changeBikeBuild, fetchBikeParts, resetBikeBuild },
+    dispatch,
+  );
 
 export const BikePartSelectorContainer = connect(
   mapStateToProps,

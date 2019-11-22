@@ -2,7 +2,7 @@ import {
   FETCH_BIKE_PARTS_PENDING,
   FETCH_BIKE_PARTS_SUCCESS,
   FETCH_BIKE_PARTS_ERROR,
-  IFetchBikePartsActionTypes
+  IFetchBikePartsActionTypes,
 } from "../actions/fetchBikePartsActions";
 import { IBikePartsAPI } from "../data_types/IBikePartsAPI";
 import { IRootState } from ".";
@@ -28,35 +28,34 @@ const initialState: IFetchState = {
     DerailleurLever: [],
     Rotor: [],
     Stem: [],
-    Saddle: [],
     Seatpost: [],
     Handlebar: [],
-    Wheels: []
+    Wheels: [],
   },
-  error: null
+  error: null,
 };
 
 export function fetchBikePartsReducer(
   state = initialState,
-  action: IFetchBikePartsActionTypes
+  action: IFetchBikePartsActionTypes,
 ): IFetchState {
   switch (action.type) {
     case FETCH_BIKE_PARTS_PENDING:
       return {
         ...state,
-        pending: true
+        pending: true,
       };
     case FETCH_BIKE_PARTS_SUCCESS:
       return {
         ...state,
         pending: false,
-        bikeParts: action.bikeParts
+        bikeParts: action.bikeParts,
       };
     case FETCH_BIKE_PARTS_ERROR:
       return {
         ...state,
         pending: false,
-        error: action.error
+        error: action.error,
       };
     default:
       return state;

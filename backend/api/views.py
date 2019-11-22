@@ -25,21 +25,21 @@ def builder_view(request):
         budget = request.GET.get("budget", 0)
         bike_type = request.GET.get("biketype", "")
         bike_parts = {
-            'frame': int(request.GET.get("frame", -1)),
-            'fork': int(request.GET.get("fork", -1)),
-            'crankset': int(request.GET.get("crankset", -1)),
-            'cassette': int(request.GET.get("cassette", -1)),
-            'frontderailleur': int(request.GET.get("frontderailleur", -1)),
-            'rearderailleur': int(request.GET.get("rearderailleur", -1)),
-            'brake': int(request.GET.get("brake", -1)),
-            'brakelever': int(request.GET.get("brakelever", -1)),
-            'derailleurlever': int(request.GET.get("derailleurlevers", -1)),
-            'rotor': int(request.GET.get("rotor", -1)),
-            'stem': int(request.GET.get("stems", -1)),
-            'handlebar': int(request.GET.get("handlebar", -1)),
-            'seatpost': int(request.GET.get("seatposts", -1)),
-            'saddle': int(request.GET.get("saddle", -1)),
-            'wheels': int(request.GET.get("wheels", -1)),
+            'Frame': int(request.GET.get("frame", -1)),
+            'Fork': int(request.GET.get("fork", -1)),
+            'Crankset': int(request.GET.get("crankset", -1)),
+            'Cassette': int(request.GET.get("cassette", -1)),
+            'FrontDerailleur': int(request.GET.get("frontderailleur", -1)),
+            'RearDerailleur': int(request.GET.get("rearderailleur", -1)),
+            'Brake': int(request.GET.get("brake", -1)),
+            'BrakeLever': int(request.GET.get("brakelever", -1)),
+            'DerailleurLever': int(request.GET.get("derailleurlevers", -1)),
+            'Rotor': int(request.GET.get("rotor", -1)),
+            'Stem': int(request.GET.get("stems", -1)),
+            'Handlebar': int(request.GET.get("handlebar", -1)),
+            'Seatpost': int(request.GET.get("seatposts", -1)),
+            'Wheels': int(request.GET.get("wheels", -1)),
+            'Shock': int(request.GET.get("shock", -1)),
         }
         builder = Builder(budget, bike_type, bike_parts)
 
@@ -110,10 +110,6 @@ class bikepartsView(ObjectMultipleModelAPIView):
         {
             'queryset': bikeparts.models.Seatpost.objects.all(),
             'serializer_class': serializers.SeatpostSerializer
-        },
-        {
-            'queryset': bikeparts.models.Saddle.objects.all(),
-            'serializer_class': serializers.SaddleSerializer
         },
         {
             'queryset': bikeparts.models.Wheels.objects.all(),
@@ -204,13 +200,6 @@ def stem_view(request):
         return serialize_all_models(
             bikeparts.models.Stem,
             serializers.StemSerializer)
-
-
-def saddle_view(request):
-    if request.method == 'GET':
-        return serialize_all_models(
-            bikeparts.models.Saddle,
-            serializers.SaddleSerializer)
 
 
 def seatpost_view(request):

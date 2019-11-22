@@ -3,6 +3,7 @@ import {
   SELECT_BIKE_TYPE,
   CHANGE_BIKE_BUILD,
   IUserInputActionTypes,
+  RESET_BIKE_BUILD,
 } from "../actions/userInputActions";
 import { IRootState } from ".";
 import { IBikeBuild } from "../data_types/IBikeBuild";
@@ -29,7 +30,6 @@ const initialState: IUserInputState = {
     DerailleurLever: { id: -1, price: 0.0 },
     Rotor: { id: -1, price: 0.0 },
     Stem: { id: -1, price: 0.0 },
-    Saddle: { id: -1, price: 0.0 },
     Seatpost: { id: -1, price: 0.0 },
     Handlebar: { id: -1, price: 0.0 },
     Wheels: { id: -1, price: 0.0 },
@@ -57,6 +57,13 @@ export function userInputReducer(
         bikeBuild: {
           ...state.bikeBuild,
           ...action.bikeBuild,
+        },
+      };
+    case RESET_BIKE_BUILD:
+      return {
+        ...state,
+        bikeBuild: {
+          ...initialState.bikeBuild,
         },
       };
     default:

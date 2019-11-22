@@ -20,7 +20,6 @@ urlpatterns = [
     path('rotors/', views.rotor_view),
     path('handlebars/', views.handlebar_view),
     path('stems/', views.stem_view),
-    path('saddles/', views.saddle_view),
     path('seatposts/', views.seatpost_view),
     path('wheels/', views.wheels_view),
     path('bikeparts/', views.bikepartsView.as_view()),

@@ -22,7 +22,6 @@ build_parts = [
     Stem,
     Handlebar,
     Seatpost,
-    Saddle,
     Wheels,
     Shock
 ]
@@ -73,8 +72,8 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         obj_index = 0
 
-        for cls in build_parts:
-            cls.objects.all().delete()
+        # for cls in build_parts:
+        #     cls.objects.all().delete()
 
         for i in range(100*(len(build_parts))-1):
 
@@ -216,7 +215,7 @@ class Command(BaseCommand):
                 frame.brake_types.set(brake_types)
                 frame.rear_derailleur_types.set(rear_derailleur_types)
                 frame.front_derailleur_types.set(front_derailleur_types)
-                frame.brake_rotor_type.set(brake_rotor_types)
+                frame.brake_rotor_types.set(brake_rotor_types)
 
                 self.stdout.write(self.style.SUCCESS(f'Created {frame}'))
             elif obj.__name__ == 'Fork':
@@ -250,6 +249,11 @@ class Command(BaseCommand):
                 brake_types = set([
                     BrakeType.objects.all()[randint(
                         0, brake_types_count-1)]
+                    for x in range(
+                        choices([1, 2, 3, 4], [0.5, 0.3, 0.15, 0.05])[0])
+                ])
+                random_applications = set([
+                    Application.objects.get(id=randint(3, 4))
                     for x in range(
                         choices([1, 2, 3, 4], [0.5, 0.3, 0.15, 0.05])[0])
                 ])
@@ -289,6 +293,12 @@ class Command(BaseCommand):
 
                 suspension_type = 'Oil' if choices(
                     [0, 1], [0.5, 0.5])[0] else 'Air'
+
+                random_applications = set([
+                    Application.objects.get(id=randint(3, 4))
+                    for x in range(
+                        choices([1, 2, 3, 4], [0.5, 0.3, 0.15, 0.05])[0])
+                ])
 
                 shock = Shock(
                     brand=random_brand,
@@ -422,12 +432,6 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.SUCCESS(
                     f'Created {rear_derailleur}'))
             elif obj.__name__ == 'Brake':
-                # /
-                # /
-                #  /               CHECK PRICESSSSSSSS
-                # /
-                # /
-                # /
                 weight = randint(150, 300) * weight_multiplier
                 price = randint(20, 80)
 
@@ -454,8 +458,10 @@ class Command(BaseCommand):
                 price = randint(10, 20)
 
                 brake_type_count = BrakeType.objects.count()
-                brake_type_type = BrakeType.objects.all()[
+                brake_type = BrakeType.objects.all()[
                     randint(0, brake_type_count-1)]
+
+                random_applications = Application.objects.all()
 
                 brake_lever = BrakeLever(
                     brand=random_brand,
@@ -501,6 +507,8 @@ class Command(BaseCommand):
                 brake_rotor_type_count = BrakeRotorType.objects.count()
                 brake_rotor_type = BrakeRotorType.objects.all()[
                     randint(0, brake_type_count-1)]
+
+                random_applications = Application.objects.all()
 
                 rotor = Rotor(
                     brand=random_brand,
@@ -576,27 +584,6 @@ class Command(BaseCommand):
                 stem.headtube_types.set(headtube_types)
                 self.stdout.write(self.style.SUCCESS(
                     f'Created {stem}'))
-            elif obj.__name__ == 'Saddle':
-
-                weight = randint(150, 200) * weight_multiplier
-                price = randint(50, 100) * price_multiplier
-
-                widths = [130, 135, 140, 145, 150, 155, 160]
-                width = choice(widths)
-
-                saddle = Saddle(
-                    brand=random_brand,
-                    group=random_group,
-                    model=model_name,
-                    material=random_material,
-                    weight=weight,
-                    color=random_color,
-                    price=price,
-                    width=width)
-                saddle.save()
-                saddle.applications.set(random_applications)
-                self.stdout.write(self.style.SUCCESS(
-                    f'Created {saddle}'))
             elif obj.__name__ == 'Seatpost':
 
                 weight = randint(100, 240) * weight_multiplier
@@ -614,6 +601,8 @@ class Command(BaseCommand):
                 for a in random_applications:
                     if a.name != 'MTB' and a.name != 'Dirt':
                         mtb = False
+
+                random_applications = Application.objects.all()
 
                 travels = [175, 180, 185, 190, 195, 200]
                 travel = choice(travels) if mtb and choices(
@@ -657,6 +646,12 @@ class Command(BaseCommand):
                     AxleType.objects.all()[randint(0, seatclamp_type_count-1)]
                     for _ in range(3)])
 
+                brake_rotor_type_count = BrakeRotorType.objects.count()
+                random_brake_rotor = BrakeRotorType.objects.all()[
+                    randint(0, brake_rotor_type_count-1)]
+                brake_rotor_types = BrakeRotorType.objects.filter(
+                    mount_type=random_brake_rotor.mount_type)
+
                 for axle_type in axle_types:
                     for brake_type in brake_types:
                         new_model_name = model_name + '_' + \
@@ -675,6 +670,7 @@ class Command(BaseCommand):
                             axle_type=axle_type)
                         wheels.save()
                         wheels.applications.set(random_applications)
+                        wheels.brake_rotor_types.set(brake_rotor_types)
                         self.stdout.write(self.style.SUCCESS(
                             f'Created {wheels}'))
 
