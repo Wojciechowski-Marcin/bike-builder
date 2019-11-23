@@ -38,7 +38,7 @@ export class BikePartSelector extends React.Component<IProps> {
             );
           },
         )}
-        <Title>Current total price: {this.props.totalPrice}</Title>
+        <Title>Current total price: {this.props.totalPrice.toFixed(2)}</Title>
       </div>
     );
   }

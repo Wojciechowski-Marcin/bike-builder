@@ -1,24 +1,26 @@
-from random import randint, shuffle
+import numpy as np
 
-from bikeparts.models import *
+from random import randint, shuffle, uniform, choice
+
+from bikeparts import models
 from .model_dependences import model_dependences
 from . import utils
 
 
 build_parts = [
-    Frame,
-    Crankset,
-    Cassette,
-    FrontDerailleur,
-    RearDerailleur,
-    Brake,
-    BrakeLever,
-    DerailleurLever,
-    Rotor,
-    Stem,
-    Handlebar,
-    Seatpost,
-    Wheels
+    models.Frame,
+    models.Crankset,
+    models.Cassette,
+    models.FrontDerailleur,
+    models.RearDerailleur,
+    models.Brake,
+    models.BrakeLever,
+    models.DerailleurLever,
+    models.Rotor,
+    models.Stem,
+    models.Handlebar,
+    models.Seatpost,
+    models.Wheels
 ]
 
 
@@ -30,22 +32,22 @@ class BikeBuild:
         self.bike_parts = bike_parts
         self.build_parts = build_parts
         if bike_type == 'MTB' or bike_type == 'Dirt':
-            self.build_parts.append(Shock)
-            self.build_parts.append(Fork)
+            self.build_parts.append(models.Shock)
+            self.build_parts.append(models.Fork)
         self.build = None
-        self.fill_build_with_initial_params()
+        self.initial_build()
 
     @property
     def price(self):
-        return sum([part.price for part in self.build])
+        return sum([part.price for part in self.build.values()])
 
     @property
     def weight(self):
-        return sum([part.weight for part in self.build])
+        return sum([part.weight for part in self.build.values()])
 
     @property
     def response(self):
-        return {name: part.id for name, part in self.build.items()}
+        return {name: {'id': part.id} for name, part in self.build.items()}
 
     @property
     def score(self):
@@ -88,14 +90,63 @@ class BikeBuild:
     def fill_build_with_initial_params(self):
         self.build = self.bike_parts
 
-    def validate_build(self):
+    def validate_build(self, debug=True):
         for key, value in self.build.items():
             if not value:
-                print(key)
+                if debug:
+                    print(key)
                 return False
         return True
 
-    def initial_build(self):
+    def swap_random_part(self, max_tries=30):
+        if max_tries == 0:
+            return None
+
+        build_length = len(self.build)
+        random_build_part_name = choice(list(self.build.keys()))
+        random_build_part_class = utils.igetattr(
+            models, random_build_part_name)
+        new_matching_parts = self.get_matching_parts(
+            random_build_part_class)
+
+        if new_matching_parts:
+            random_new_part = utils.get_random_object(new_matching_parts)
+            self.build[random_build_part_name] = random_new_part
+            return random_new_part
+
+        return self.swap_random_part(max_tries-1)
+
+    def _temperature(self, fraction):
+        return max(0.01, min(1, 1-fraction))
+
+    def _acceptance_probability(self, cost, new_cost, temp):
+        if cost > new_cost:
+            return 1
+        else:
+            return np.exp(-float(new_cost-cost)/temp)
+
+    def find_best_parts(self, max_steps=1000, debug=True):
+        build, cost = self.build, self.score
+        # builds, costs = [build], [cost]
+        for step in range(max_steps):
+            fraction = step / float(max_steps)
+            temp = self._temperature(fraction)
+            self.swap_random_part()
+            new_build, new_cost = self.build, self.score
+            if debug:
+                print(
+                    f'Step {step} : T = {"{0:.3f}".format(temp)}\t'
+                    f'cost = {cost}\tnew_cost = {new_cost}')
+            if self._acceptance_probability(
+                    cost, new_cost, temp) > uniform(0, 1):
+                build, cost = new_build, new_cost
+            else:
+                self.build = build
+
+    def initial_build(self, max_tries=50):
+        if max_tries == 0:
+            return None
+
         self.fill_build_with_initial_params()
 
         shuffle(self.build_parts)
@@ -110,6 +161,6 @@ class BikeBuild:
                 self.build[build_part_name] = found_part
 
         if not self.validate_build():
-            self.build = None
+            return self.initial_build(max_tries-1)
 
         return self.build

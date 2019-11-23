@@ -21,3 +21,9 @@ def querysets_intersection(queryset_list):
 
 def is_any_key_in_dict(keys, dict):
     return any([(key in dict for key in keys)])
+
+
+def igetattr(obj, attr):
+    for a in dir(obj):
+        if a.lower() == attr.lower():
+            return getattr(obj, a)
