@@ -30,6 +30,14 @@ build_parts = [
 class Command(BaseCommand):
     help = 'Imports database from excel sheet'
 
+    def add_arguments(self, parser):
+        parser.add_argument('count', type=int, nargs='?')
+        parser.add_argument(
+            '--delete',
+            action='store_true',
+            help='Delete models before creating',
+        )
+
     def get_speed_compatibilities(self, exclude=""):
 
         speed_compatibility_count = SpeedCompatibility.objects.count()
@@ -72,10 +80,13 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         obj_index = 0
 
-        # for cls in build_parts:
-        #     cls.objects.all().delete()
+        count = kwargs['count'] or 100
 
-        for i in range(100*(len(build_parts))-1):
+        if kwargs['delete']:
+            for cls in build_parts:
+                cls.objects.all().delete()
+
+        for i in range(count*(len(build_parts))-1):
 
             obj = build_parts[obj_index]
             if i % 100 == 99:
