@@ -33,7 +33,14 @@ export function getBikePartSelectorData(
         ),
       }),
   );
-  return cascaderOptions;
+  let cascaderOptionsKeys = Object.keys(cascaderOptions);
+  cascaderOptionsKeys.sort();
+  let sortedCascaderOptions: IBikePartSelectorData = {};
+  for (var i = 0; i < cascaderOptionsKeys.length; i++) {
+    const key = cascaderOptionsKeys[i];
+    sortedCascaderOptions[key] = cascaderOptions[key];
+  }
+  return sortedCascaderOptions;
 }
 
 export const NoAvailablePartsText = "Your budget is out! :(";

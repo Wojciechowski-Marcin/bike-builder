@@ -10,17 +10,23 @@ import {
 } from "../../reducers/fetchBuildReducer";
 import { fetchBuild } from "../../data/fetchBuild";
 import { IBikeBuild } from "../../data_types/IBikeBuild";
-import { getBikeBuild } from "../../reducers/userInputReducer";
+import {
+  getBikeBuild,
+  getBudget,
+  getSelectedBikeType,
+} from "../../reducers/userInputReducer";
 import { getFetchBikePartsResult } from "../../reducers/fetchBikePartsReducer";
 import { IBikePartsAPI } from "../../data_types/IBikePartsAPI";
 
 interface IProps {
+  budget: number;
+  bikeType: string;
   userBuild: IBikeBuild;
   bikeParts: IBikePartsAPI;
   fetchBuildResult: IBikeBuild;
   fetchBuildError: Error | null;
   fetchBuildPending: boolean;
-  fetchBuild: (bikeBuild: IBikeBuild) => void;
+  fetchBuild: (bikeBuild: IBikeBuild, bikeType: string, budget: number) => void;
 }
 
 interface IState {
@@ -41,6 +47,7 @@ class BuildResult_ extends React.Component<IProps, IState> {
     this.onClick = this.onClick.bind(this);
     this.dataSource = this.dataSource.bind(this);
     this.getFooter = this.getFooter.bind(this);
+    this.createLabel = this.createLabel.bind(this);
   }
 
   componentDidUpdate(prevProps: IProps) {
@@ -57,7 +64,11 @@ class BuildResult_ extends React.Component<IProps, IState> {
       ...this.state,
       buttonLoading: true,
     });
-    this.props.fetchBuild(this.props.userBuild);
+    this.props.fetchBuild(
+      this.props.userBuild,
+      this.props.bikeType,
+      this.props.budget,
+    );
   }
 
   getPartById(bikeParts: IBikePartsAPI, key: string, id: number) {
@@ -96,6 +107,20 @@ class BuildResult_ extends React.Component<IProps, IState> {
     }
   }
 
+  createLabel(string: string) {
+    let returnValue = "";
+    let capitalizedString = string[0].toUpperCase() + string.substr(1);
+    let leverSplit = capitalizedString.split("lever");
+    if (leverSplit.length === 2) {
+      returnValue = leverSplit[0] + "Lever";
+    }
+    let derailleurSplit = capitalizedString.split("derailleur");
+    if (derailleurSplit.length === 2) {
+      returnValue = derailleurSplit[0] + "Derailleur";
+    }
+    return returnValue || capitalizedString;
+  }
+
   dataSource() {
     const allBikeParts = this.props.bikeParts;
     const bikeBuild = this.props.fetchBuildResult;
@@ -106,7 +131,7 @@ class BuildResult_ extends React.Component<IProps, IState> {
       const bikePart = this.getPartById(allBikeParts, key, part.id);
       const dataSourceElement = {
         key: index,
-        type: key,
+        type: this.createLabel(key),
         model: bikePart!.model,
         weight: bikePart!.weight,
         price: bikePart!.price,
@@ -196,6 +221,8 @@ const mapStateToProps = (state: IRootState) => ({
   fetchBuildError: getFetchBuildError(state),
   fetchBuildPending: getFetchBuildPending(state),
   bikeParts: getFetchBikePartsResult(state),
+  budget: getBudget(state),
+  bikeType: getSelectedBikeType(state),
   userBuild: getBikeBuild(state),
 });
 

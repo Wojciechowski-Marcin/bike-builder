@@ -13,15 +13,9 @@ function App() {
       <Layout className="layout">
         <Header style={style.header}>
           <div className="logo" />
-          <Menu
-            mode="horizontal"
-            defaultSelectedKeys={["1"]}
-            style={style.menu}
-          >
-            <Menu.Item key="1">Home</Menu.Item>
-            <Menu.Item key="2">Categories</Menu.Item>
-            <Menu.Item key="3">Build</Menu.Item>
-          </Menu>
+          <Title style={style.navTitle} level={2}>
+            Bike builder
+          </Title>
         </Header>
         <Content style={style.content}>
           <Title style={style.title}>Build your dream bike!</Title>
@@ -55,6 +49,11 @@ const style = {
     width: "100%",
     zIndex: 1,
     backgroundColor: "white",
+  } as React.CSSProperties,
+  navTitle: {
+    position: "relative",
+    top: "50%",
+    transform: "translate(0, -50%)",
   } as React.CSSProperties,
 };
 

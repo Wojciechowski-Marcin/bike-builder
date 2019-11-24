@@ -1,4 +1,5 @@
 import numpy as np
+from copy import deepcopy
 
 from random import randint, shuffle, uniform, choice
 
@@ -37,6 +38,12 @@ class BikeBuild:
         self.build = None
         self.initial_build()
 
+    def build_price(self, build):
+        return sum([part.price for part in build.values()])
+
+    def build_weight(self, build):
+        return sum([part.weight for part in build.values()])
+
     @property
     def price(self):
         return sum([part.price for part in self.build.values()])
@@ -54,8 +61,8 @@ class BikeBuild:
         score = self.weight
         price = self.price
 
-        score = score+5000 if price > self.budget \
-            else score-(self.budget-price)
+        if price > self.budget:
+            score += 50000
 
         return score
 
@@ -80,15 +87,13 @@ class BikeBuild:
                     dependent_part, function_name)
 
                 queryset = get_matching_parts_function()
+                # print(key, part_class_name)
                 filtered_queryset = queryset.filter(
                     applications__name=self.bike_type)
 
-                querysets.append(queryset)
+                querysets.append(filtered_queryset)
 
         return utils.querysets_intersection(querysets)
-
-    def fill_build_with_initial_params(self):
-        self.build = self.bike_parts
 
     def validate_build(self, debug=True):
         for key, value in self.build.items():
@@ -126,13 +131,17 @@ class BikeBuild:
             return np.exp(-float(new_cost-cost)/temp)
 
     def find_best_parts(self, max_steps=1000, debug=True):
+        if not self.build:
+            return
         build, cost = self.build, self.score
-        # builds, costs = [build], [cost]
+        builds, costs = [build], [cost]
         for step in range(max_steps):
             fraction = step / float(max_steps)
             temp = self._temperature(fraction)
             self.swap_random_part()
-            new_build, new_cost = self.build, self.score
+            new_build, new_cost = deepcopy(self.build), deepcopy(self.score)
+            builds.append(new_build)
+            costs.append(new_cost)
             if debug:
                 print(
                     f'Step {step} : T = {"{0:.3f}".format(temp)}\t'
@@ -143,11 +152,29 @@ class BikeBuild:
             else:
                 self.build = build
 
-    def initial_build(self, max_tries=50):
+        budget_builds = self.filter_builds_under_budget(builds)
+        self.build = self.best_build(budget_builds) if budget_builds else None
+
+    def best_build(self, builds):
+        sorted_builds = sorted(
+            builds, key=lambda build: self.build_weight(build))
+        return sorted_builds[0]
+
+    def filter_builds_under_budget(self, builds):
+        budget = self.budget
+        budget_builds = []
+
+        for build in builds:
+            if self.build_price(build) <= self.budget:
+                budget_builds.append(build)
+
+        return budget_builds
+
+    def initial_build(self, max_tries=200):
         if max_tries == 0:
             return None
 
-        self.fill_build_with_initial_params()
+        self.build = self.bike_parts
 
         shuffle(self.build_parts)
         for build_part in self.build_parts:

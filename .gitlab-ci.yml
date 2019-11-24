@@ -28,6 +28,7 @@ test_backend:
   before_script:
     - source <(sed 's/^/export /' env/backend.env)
     - cd backend
+    - pip install numpy
     - pip install -r requirements.txt
   script:
     - python manage.py test

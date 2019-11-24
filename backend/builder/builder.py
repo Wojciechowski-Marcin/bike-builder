@@ -1,9 +1,10 @@
 import time
 
 from django.http import JsonResponse
+from collections import OrderedDict
+
 from bikeparts import models as bikeparts_models
 from bikeproperties.models import *
-
 from .bike_build import BikeBuild, build_parts
 
 
@@ -26,5 +27,9 @@ class Builder:
         self.make_build()
         if not self.bike_build.build:
             print("RETURNED NONE")
-        return JsonResponse(self.bike_build.response) if self.bike_build.build\
+        sortedResponse = OrderedDict(sorted(
+            self.bike_build.response.items(),
+            key=lambda i: i[0])) \
+            if self.bike_build.build else None
+        return JsonResponse(sortedResponse) if sortedResponse \
             else JsonResponse({'error': "couldnt build"})

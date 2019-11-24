@@ -195,10 +195,10 @@ class Command(BaseCommand):
                 recommended_fork_travel = choice([
                     100, 110, 120, 130, 140, 150, 160, 170, 180, 190])
 
-                mtb = True
+                mtb = False
                 for a in random_applications:
-                    if a.name != 'MTB' and a.name != 'Dirt':
-                        mtb = False
+                    if a.name == 'MTB' or a.name == 'Dirt':
+                        mtb = True
                 if not mtb:
                     recommended_fork_travel = None
                     shock_type = None

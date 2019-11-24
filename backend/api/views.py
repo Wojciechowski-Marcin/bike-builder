@@ -22,7 +22,7 @@ def builder_view(request):
     '''
 
     if request.method == 'GET':
-        budget = request.GET.get("budget", 0)
+        budget = int(request.GET.get("budget", 0))
         bike_type = request.GET.get("biketype", "")
         bike_parts = {
             'Frame': int(request.GET.get("frame", -1)),

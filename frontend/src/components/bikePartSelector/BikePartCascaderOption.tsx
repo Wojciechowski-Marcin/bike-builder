@@ -23,6 +23,9 @@ export class BikePartCascaderOption extends React.Component<IProps> {
 
 const style = {
   div: {
-    width: "100%"
-  }
+    width: "100%",
+    borderBottom: "1px solid rgba(30,214,73,0.5)",
+    background:
+      "radial-gradient(ellipse at center, rgba(206,248,216,1) 0%, rgba(255,255,255,1) 100%)",
+  },
 };

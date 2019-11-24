@@ -17,11 +17,15 @@ function createFetchParametersFromBikeBuild(bikeBuild: IBikeBuild) {
   return parameters;
 }
 
-export function fetchBuild(bikeBuild: IBikeBuild) {
+export function fetchBuild(
+  bikeBuild: IBikeBuild,
+  bikeType: string,
+  budget: number,
+) {
   const parameters = createFetchParametersFromBikeBuild(bikeBuild);
   return (dispatch: Dispatch) => {
     dispatch(fetchBuildPending());
-    fetch(`api/builder/${parameters}`)
+    fetch(`api/builder/${parameters}biketype=${bikeType}&budget=${budget}`)
       .then(res => res.json())
       .then(res => {
         if (res.error) {
