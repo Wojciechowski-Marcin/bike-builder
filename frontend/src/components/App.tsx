@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Layout, Menu, Typography } from "antd";
+import { Layout, Typography } from "antd";
 import { BikeTypeSelector } from "./bikeType/BikeTypeSelector";
 import { BikePartSelectorContainer } from "./bikePartSelector/BikePartSelectorContainer";
 
